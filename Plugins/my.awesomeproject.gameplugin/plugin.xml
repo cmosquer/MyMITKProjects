@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin>
+  <extension point="org.blueberry.ui.views">
+    <view id="my.awesomeproject.views.game"
+          name="Game_Estructuras"
+          class="Game_Estructuras"
+          icon="resources/GameIcon.jpg" />
+  </extension>
+</plugin>

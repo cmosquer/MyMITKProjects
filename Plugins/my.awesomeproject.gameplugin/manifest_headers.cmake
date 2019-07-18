@@ -1,0 +1,5 @@
+set(Plugin-Name "Game Plugin")
+set(Plugin-Version "0.1")
+set(Plugin-Vendor "Awesome Company")
+set(Plugin-ContactAddress "http://www.awesomeproject.my")
+set(Require-Plugin org.mitk.gui.qt.common org.mitk.gui.qt.pointsetinteraction)

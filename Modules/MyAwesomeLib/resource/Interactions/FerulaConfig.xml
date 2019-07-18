@@ -1,0 +1,25 @@
+<config>
+
+  <event_variant class="MousePressEvent" name="leftClick">
+		<attribute name="EventButton" value="LeftMouseButton"/>
+		<attribute name="Modifiers" value="shift"/>
+  </event_variant>
+
+  <event_variant class="MousePressEvent" name="rightClick">
+		<attribute name="EventButton" value="RightMouseButton"/>
+		<attribute name="Modifiers" value="shift"/>
+  </event_variant>
+
+  <event_variant class="MouseMoveEvent" name="Hover">
+  </event_variant>
+
+  <event_variant class="MousePressEvent" name="leftClickControl">
+		<attribute name="Modifiers" value="ctrl"/>
+		<attribute name="EventButton" value="LeftMouseButton"/>
+  </event_variant>
+  <event_variant class="MousePressEvent" name="rightClickControl">
+		<attribute name="Modifiers" value="ctrl"/>
+		<attribute name="EventButton" value="RightMouseButton"/>
+  </event_variant>
+
+</config>

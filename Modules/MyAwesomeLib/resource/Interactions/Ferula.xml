@@ -1,0 +1,68 @@
+<statemachine>
+	<state name="StartState" startstate="true">
+	
+		<transition event_class="MousePressEvent" 	event_variant="leftClick" 											target="MarkingState">
+			<action name="newMark"/>
+		</transition>
+		
+		<transition event_class="MouseMoveEvent" 		event_variant="Hover" 													target="StartState">
+			<action name="hover"/>
+		</transition>
+
+		<transition event_class="MousePressEvent" 	event_variant="rightClick" 											target="ErasingState">
+			<action name="newErase"/>
+		</transition>
+
+		<transition event_class="MousePressEvent" 	event_variant="leftClickControl" 											target="MarkingPoints">
+			<action name="firstPoint"/>
+		</transition>
+
+	</state>
+	  
+
+	<state name="MarkingState">
+
+		<transition event_class="MouseMoveEvent" 		event_variant="Hover" 												target="MarkingState">
+	        	<action name="displayMark"/>
+		</transition>
+
+  	<transition event_class="MousePressEvent" event_variant="leftClick" 													target="StartState">
+	        	<action name="defineMark"/>
+		</transition>
+  	<transition event_class="MousePressEvent" event_variant="rightClick" 													target="StartState">
+	        	<action name="cancelMark"/>
+		</transition>
+ 
+
+	  </state>
+  <state name="ErasingState">
+		<transition event_class="MouseMoveEvent" 		event_variant="Hover"													target="ErasingState">
+	        	<action name="displayErase"/>
+		</transition>
+
+  	<transition event_class="MousePressEvent" event_variant="rightClick" 										target="StartState">
+	        	<action name="defineErase"/>
+		</transition>
+   
+  	<transition event_class="MousePressEvent" event_variant="leftClick" 										target="StartState">
+	        	<action name="cancelErase"/>
+		</transition>   
+	 </state>   
+
+	<state name="MarkingPoints">
+		<transition event_class="MousePressEvent" 		event_variant="leftClickControl"													target="MarkingPoints">
+	        	<action name="middlePoint"/>
+		</transition>
+
+		<transition event_class="MousePressEvent" 		event_variant="rightClickControl"													target="StartState">
+	        	<action name="lastPoint"/>
+		</transition>
+
+  		<transition event_class="MousePressEvent" event_variant="leftClick" 										target="StartState">
+	        	<action name="cancelPointSet"/>
+		</transition>   
+		<transition event_class="MouseMoveEvent" 		event_variant="Hover" 													target="MarkingPoints">
+			<action name="hover"/>
+		</transition>
+	</state>
+</statemachine>
