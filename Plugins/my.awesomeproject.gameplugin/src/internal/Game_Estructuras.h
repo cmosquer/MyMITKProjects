@@ -27,8 +27,8 @@ See LICENSE.txt or http://www.mitk.org for details.
 #include <mitkLabelSetImage.h>
 #include <qtablewidget.h>
 #include <QTableWidget>
-#include <QVTKWidget.h>
-
+//#include <QVTKWidget.h>
+#include <QVTKOpenGLWidget.h>
 #include "itkImage.h"
 #include "itkImageFileWriter.h"
 // There's an item "FerulaControls.ui" in the UI_FILES list in
@@ -71,7 +71,7 @@ public:
 
   //Widget de Play:
   QWidget *playWidget;
-  vector<QVTKWidget*> vtkWindows;
+  vector<QVTKOpenGLWidget*> vtkWindows;
   QPushButton *pbStart;
    /*
   QPushButton *pbExport;
@@ -99,12 +99,14 @@ private slots:
   void onPunto();
   void onAtras();
   void onConfirmar();
+  void onToggle();
 
 private:
   // Typically a one-liner. Set the focus to the default widget.
   void SetFocus() override;
   //void widgetToNodesView();
   //void widgetToItemsView();
+  void agregarOpcion();
   void changeScreen(int);
   void prepararResumen();
 

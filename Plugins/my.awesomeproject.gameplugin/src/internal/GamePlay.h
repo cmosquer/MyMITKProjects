@@ -21,7 +21,8 @@ See LICENSE.txt or http://www.mitk.org for details.
 #include <QDialog>
 #include<bits/stdc++.h>
 #include <vector>
-#include <QVTKWidget.h>
+#include <QVTKOpenGLWidget.h>
+//#include <QVTKWidget.h>
 #include <QMediaPlayer>
 #include <mitkDataNode.h>
 #include <mitkDataStorage.h>
@@ -48,7 +49,7 @@ private slots:
   void playClicked();
 
 private:
-  std::vector<QVTKWidget*> options_widgets;
+  std::vector<QVTKOpenGLWidget*> options_widgets;
   mitk::DataStorage::Pointer m_dataStorage;
   int N_items;
   QObject *m_correct_answer;

@@ -21,7 +21,7 @@ endif()
 # Superbuild Option - Enabled by default
 #-----------------------------------------------------------------------------
 
-option(${MY_PROJECT_NAME}_USE_SUPERBUILD "Build ${MY_PROJECT_NAME} and the projects it depends on via SuperBuild.cmake." ON)
+option(${MY_PROJECT_NAME}_USE_SUPERBUILD "Build ${MY_PROJECT_NAME} and the projects it depends on via SuperBuild.cmake." OFF)
 
 if(${MY_PROJECT_NAME}_USE_SUPERBUILD)
   project(${MY_PROJECT_NAME}-superbuild)
@@ -407,7 +407,7 @@ add_subdirectory(Apps)
 #-----------------------------------------------------------------------------
 
 # set MITK cpack variables
-include(mitkSetupCPack)
+#include(mitkSetupCPack)
 
 # Customize CPack variables for this project
 include(CPackSetup)
@@ -419,7 +419,7 @@ configure_file(${MITK_SOURCE_DIR}/MITKCPackOptions.cmake.in
 set(CPACK_PROJECT_CONFIG_FILE "${PROJECT_BINARY_DIR}/${PROJECT_NAME}CPackOptions.cmake")
 
 # include CPack model once all variables are set
-include(CPack)
+#include(CPack)
 
 # Additional installation rules
 include(mitkInstallRules)

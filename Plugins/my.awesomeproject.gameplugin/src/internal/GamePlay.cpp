@@ -39,7 +39,8 @@ See LICENSE.txt or http://www.mitk.org for details.
 
 #include <QGridLayout>
 #include <QLabel>
-#include <QVTKWidget.h>
+#include <QVTKOpenGLWidget.h>
+//#include <QVTKWidget.h>
 #include <QmitkRenderWindow.h>
 #include <QMediaPlayer>
 #include <QmitkSliceWidget.h>

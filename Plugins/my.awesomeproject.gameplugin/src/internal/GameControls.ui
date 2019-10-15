@@ -18,6 +18,13 @@
   </property>
   <layout class="QFormLayout" name="formLayout_2">
    <item row="0" column="1">
+    <widget class="QLabel" name="labelTitulo">
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
     <widget class="QPushButton" name="pbCrear">
      <property name="enabled">
       <bool>true</bool>
@@ -27,28 +34,15 @@
      </property>
     </widget>
    </item>
-   <item row="1" column="1">
+   <item row="2" column="1">
     <widget class="QPushButton" name="pbCargarJuego">
      <property name="text">
       <string>Cargar juego existente</string>
      </property>
     </widget>
    </item>
-   <item row="4" column="1">
-    <spacer name="verticalSpacer_2">
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>20</width>
-       <height>40</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
    <item row="5" column="1">
-    <widget class="QLabel" name="label_6">
+    <widget class="QLabel" name="indicacion">
      <property name="text">
       <string>Escribir pregunta:</string>
      </property>
@@ -61,17 +55,98 @@
      </property>
     </widget>
    </item>
-   <item row="8" column="1">
-    <widget class="QLabel" name="label_3">
-     <property name="text">
-      <string>Objetos incluidos:</string>
+   <item row="7" column="1">
+    <spacer name="verticalSpacer_2">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
      </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="8" column="1">
+    <widget class="QGroupBox" name="groupBoxEscenario">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>100</height>
+      </size>
+     </property>
+     <property name="title">
+      <string/>
+     </property>
+     <widget class="QRadioButton" name="rbEscenario">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>20</y>
+        <width>191</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Incluir escenario virtual</string>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="cbVistasPreg">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>40</y>
+        <width>421</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="currentText">
+       <string>3D</string>
+      </property>
+      <item>
+       <property name="text">
+        <string>3D</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Sagital</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Axial</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Coronal</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QRadioButton" name="rbSoloTexto">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>70</y>
+        <width>112</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Solo texto</string>
+      </property>
+     </widget>
     </widget>
    </item>
    <item row="9" column="1">
-    <widget class="QTextEdit" name="teObjetos">
-     <property name="enabled">
-      <bool>false</bool>
+    <widget class="QLabel" name="indicacion2">
+     <property name="text">
+      <string/>
      </property>
     </widget>
    </item>
@@ -81,47 +156,12 @@
       <number>0</number>
      </property>
      <item>
-      <widget class="QComboBox" name="cbVistasPreg">
-       <property name="enabled">
-        <bool>true</bool>
-       </property>
-       <property name="currentText">
-        <string>Seleccione vista</string>
-       </property>
-       <item>
-        <property name="text">
-         <string>Seleccione vista</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>3D</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Sagital</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Axial</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Coronal</string>
-        </property>
-       </item>
-      </widget>
-     </item>
-     <item>
       <layout class="QHBoxLayout" name="horizontalLayout_9">
        <property name="bottomMargin">
         <number>0</number>
        </property>
        <item>
-        <widget class="QLabel" name="label_2">
+        <widget class="QLabel" name="labelScore">
          <property name="text">
           <string>Score:</string>
          </property>
@@ -157,6 +197,16 @@
      </property>
     </spacer>
    </item>
+   <item row="13" column="1">
+    <widget class="QLabel" name="teItem">
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </item>
+   <item row="14" column="1">
+    <widget class="QComboBox" name="cbItem"/>
+   </item>
    <item row="15" column="1">
     <layout class="QHBoxLayout" name="horizontalLayout_6">
      <property name="bottomMargin">
@@ -185,26 +235,58 @@
     </layout>
    </item>
    <item row="16" column="1">
-    <spacer name="verticalSpacer_4">
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
+    <widget class="QGroupBox" name="radioButtonsBox">
+     <property name="minimumSize">
       <size>
-       <width>20</width>
-       <height>40</height>
+       <width>0</width>
+       <height>80</height>
       </size>
      </property>
-    </spacer>
-   </item>
-   <item row="18" column="1">
-    <widget class="QCheckBox" name="cbCorrecta">
-     <property name="text">
-      <string>Es opción correcta</string>
+     <property name="title">
+      <string/>
      </property>
+     <widget class="QRadioButton" name="rbSI">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>50</y>
+        <width>441</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>SI</string>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="rbNO">
+      <property name="geometry">
+       <rect>
+        <x>100</x>
+        <y>50</y>
+        <width>441</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>NO</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="labelCorrecta">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>30</y>
+        <width>201</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>¿Esta es la opción correcta?</string>
+      </property>
+     </widget>
     </widget>
    </item>
-   <item row="21" column="1">
+   <item row="19" column="1">
     <spacer name="verticalSpacer_5">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -217,7 +299,7 @@
      </property>
     </spacer>
    </item>
-   <item row="24" column="1">
+   <item row="22" column="1">
     <spacer name="verticalSpacer">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -230,7 +312,7 @@
      </property>
     </spacer>
    </item>
-   <item row="25" column="1">
+   <item row="23" column="1">
     <layout class="QHBoxLayout" name="horizontalLayout_8">
      <property name="bottomMargin">
       <number>0</number>
@@ -266,16 +348,6 @@
       </widget>
      </item>
     </layout>
-   </item>
-   <item row="14" column="1">
-    <widget class="QComboBox" name="cbItem"/>
-   </item>
-   <item row="13" column="1">
-    <widget class="QLabel" name="teItem">
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
    </item>
   </layout>
  </widget>

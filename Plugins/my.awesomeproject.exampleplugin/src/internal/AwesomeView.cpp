@@ -171,8 +171,8 @@ AwesomeView::AwesomeView()
 	resultsWidget->hide();
 	resultsWidget->setMinimumSize(1000, 600);
 
-	tableWidget->verticalHeader()->hide();
-	tableWidget->horizontalHeader()->hide();
+    //tableWidget->verticalHeader()->hide();
+    //tableWidget->horizontalHeader()->hide();
 	tableWidget->setEnabled(false);
 
 	titulo->setGeometry(300, 0, 700, 90);
