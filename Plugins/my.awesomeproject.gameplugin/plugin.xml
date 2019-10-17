@@ -2,7 +2,7 @@
 <plugin>
   <extension point="org.blueberry.ui.views">
     <view id="my.awesomeproject.views.game"
-          name="Game_Estructuras"
+          name="Game Creator"
           class="Game_Estructuras"
           icon="resources/GameIcon.jpg" />
   </extension>

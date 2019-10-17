@@ -85,7 +85,7 @@ private slots:
   //void createInteractor();
   void onCrearJuego();
   void onAgregarItem();
-  void onConfirmarPreg();
+  void onConfirmarPreg(int mode);
   void onAgregarOpcion();
   void onEliminarItem();
   void onCancelarJuego();
@@ -100,13 +100,14 @@ private slots:
   void onAtras();
   void onConfirmar();
   void onToggle();
+  void onGenerico();
 
 private:
   // Typically a one-liner. Set the focus to the default widget.
   void SetFocus() override;
   //void widgetToNodesView();
   //void widgetToItemsView();
-  void agregarOpcion();
+  void agregarOpcion(int mode);
   void changeScreen(int);
   void prepararResumen();
 
@@ -125,6 +126,7 @@ private:
   //mitk::DataNode::Pointer m_currentQuestion;
   //vector <mitk::DataNode::Pointer> m_currentAnswer;
   bool m_flag_hay_correcta;
+  bool m_standard_options_flag;
   int current_screen;
   string m_option_summary;
   string m_question_summary;

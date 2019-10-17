@@ -116,6 +116,7 @@ void Game_Estructuras::changeScreen(int scr)
     m_Controls.teItem->setVisible(false);
     m_Controls.indicacion2->setVisible(false);
     m_Controls.radioButtonsBox->setVisible(false);
+    m_Controls.cbGenerico->setVisible(false);
 
 
   }
@@ -142,7 +143,7 @@ void Game_Estructuras::changeScreen(int scr)
     m_Controls.teItem->setVisible(false);
     m_Controls.radioButtonsBox->setVisible(false);
     m_Controls.labelCorrecta->setVisible(false);
-
+    m_Controls.cbGenerico->setVisible(false);
   }
 
   if(scr==ESCRIBIR_PREG)
@@ -173,7 +174,8 @@ void Game_Estructuras::changeScreen(int scr)
     m_Controls.radioButtonsBox->setVisible(false);
     m_Controls.labelCorrecta->setVisible(false);
     m_Controls.indicacion2->setVisible(false);
-
+    m_Controls.cbGenerico->setVisible(false);
+    m_Controls.cbGenerico->setChecked(false);
     //QFont summary_font;
     //summary_font.setItalic(true);
     //m_Controls.label_currentoptions->setFont(summary_font);
@@ -183,6 +185,7 @@ void Game_Estructuras::changeScreen(int scr)
   if (scr==SELECCIONAR_OBJETOS_PREG)
   {
       m_Controls.radioButtonsBox->setVisible(false);
+      m_Controls.groupBoxEscenario->setVisible(true);
       m_Controls.rbEscenario->setChecked(false);
       m_Controls.rbSoloTexto->setChecked(false);
       m_Controls.labelCorrecta->setVisible(false);
@@ -197,7 +200,6 @@ void Game_Estructuras::changeScreen(int scr)
       /*m_Controls.pbFlecha->setVisible(true);
       m_Controls.pbFlecha->setText("Agregar flecha");
       m_Controls.pbPunto->setVisible(true);*/
-      m_Controls.groupBoxEscenario->setVisible(true);
       m_Controls.labelScore->setVisible(false);
       m_Controls.indicacion->setVisible(false);
       m_Controls.lePreg->setVisible(true);
@@ -206,8 +208,9 @@ void Game_Estructuras::changeScreen(int scr)
       m_Controls.leScore->setValue(100);
       m_Controls.cbItem->setVisible(false);
       m_Controls.teItem->setVisible(false);
+      m_Controls.cbGenerico->setVisible(false);
       m_Controls.indicacion2->setVisible(false);
-      m_Controls.indicacion2->setText("Deje visibles aquellos objetos que sean parte de la pregunta. \n Seleccione qué vista es la adecuada para la pregunta. ");
+      m_Controls.indicacion2->setText("Deje visibles aquellos objetos que sean parte de la pregunta. \nSeleccione qué vista es la adecuada para la pregunta. ");
   }
 
   if(scr==INICIO_RESPUESTA)
@@ -236,13 +239,20 @@ void Game_Estructuras::changeScreen(int scr)
     m_Controls.indicacion2->setVisible(false);
     m_Controls.radioButtonsBox->setVisible(false);
     m_Controls.labelCorrecta->setVisible(false);
+    m_Controls.cbGenerico->setVisible(false);
+    m_Controls.rbEscenario->setChecked(false);
+    m_Controls.rbSoloTexto->setChecked(false);
 
   }
   if(scr==ESCRIBIR_OPC)
   {
+    m_Controls.cbGenerico->setChecked(false);
+
     std::string tit = "Respuesta "+ std::to_string(N_items) + "\nOpción " +  std::to_string(N_options[N_items-1]+1);
     m_Controls.labelTitulo->setText(tit.c_str());
     m_Controls.indicacion2->setVisible(false);
+    m_Controls.rbEscenario->setChecked(false);
+    m_Controls.rbSoloTexto->setChecked(false);
 
     m_Controls.pbCrear->setVisible(false);
     m_Controls.pbCargarJuego->setVisible(false);
@@ -266,6 +276,7 @@ void Game_Estructuras::changeScreen(int scr)
     m_Controls.teItem->setVisible(false);
     m_Controls.radioButtonsBox->setVisible(false);
     m_Controls.labelCorrecta->setVisible(false);
+    m_Controls.cbGenerico->setVisible(true);
 
 
     //QFont summary_font;
@@ -303,13 +314,15 @@ void Game_Estructuras::changeScreen(int scr)
       m_Controls.teItem->setVisible(false);
       m_Controls.radioButtonsBox->setVisible(false);
       m_Controls.labelCorrecta->setVisible(false);
-
+      m_Controls.cbGenerico->setVisible(false);
       m_Controls.indicacion2->setVisible(false);
       m_Controls.indicacion2->setText("Deje visibles aquellos objetos que sean \nparte de esta opción de respuesta. \n Seleccione qué vista es la adecuada para la respuesta. ");
   }
 
   if (scr==DEFINIR_CORRECTA_OPC)
   {
+      m_Controls.rbEscenario->setChecked(false);
+      m_Controls.rbSoloTexto->setChecked(false);
       m_Controls.pbCrear->setVisible(false);
       m_Controls.pbCargarJuego->setVisible(false);
       m_Controls.pbAtras->setVisible(true);
@@ -330,6 +343,7 @@ void Game_Estructuras::changeScreen(int scr)
       m_Controls.leScore->setValue(100);
       m_Controls.cbItem->setVisible(false);
       m_Controls.teItem->setVisible(false);
+      m_Controls.cbGenerico->setVisible(false);
       if (m_flag_hay_correcta)
       {
           m_Controls.radioButtonsBox->setVisible(false);
@@ -346,6 +360,8 @@ void Game_Estructuras::changeScreen(int scr)
   }
   if (scr==DEFINIR_PUNTOS)
   {
+      m_Controls.rbEscenario->setChecked(false);
+      m_Controls.rbSoloTexto->setChecked(false);
       std::string tit = "Pregunta "+ std::to_string(N_items) + "\nPuntaje";
       m_Controls.labelTitulo->setText(tit.c_str());
       m_Controls.pbCrear->setVisible(false);
@@ -370,14 +386,17 @@ void Game_Estructuras::changeScreen(int scr)
       m_Controls.teItem->setVisible(false);
       m_Controls.radioButtonsBox->setVisible(false);
       m_Controls.labelCorrecta->setVisible(false);
+      m_Controls.cbGenerico->setVisible(false);
 
       m_Controls.indicacion2->setVisible(true);
       m_Controls.indicacion2->setText("Indique cuántos puntos se ganarán al responder bien esta pregunta.");
   }
   if(scr==RESUMEN)
   {
-    std::string tit = "Pregunta "+ std::to_string(N_items);
+    std::string tit = "RESUMEN DE JUEGO";
     m_Controls.labelTitulo->setText(tit.c_str());
+    m_Controls.rbEscenario->setChecked(false);
+    m_Controls.rbSoloTexto->setChecked(false);
     m_Controls.pbCrear->setVisible(false);
     m_Controls.pbCargarJuego->setVisible(false);
     m_Controls.pbAtras->setVisible(true);
@@ -391,13 +410,14 @@ void Game_Estructuras::changeScreen(int scr)
     m_Controls.groupBoxEscenario->setVisible(false);
     m_Controls.labelScore->setVisible(false);
     m_Controls.indicacion->setVisible(false);
-    m_Controls.indicacion2->setText("RESUMEN DE JUEGO");
+    m_Controls.indicacion2->setVisible(false);
     m_Controls.lePreg->setVisible(false);
     m_Controls.leScore->setVisible(false);
     m_Controls.cbItem->setVisible(true);
     m_Controls.teItem->setVisible(true);
     m_Controls.radioButtonsBox->setVisible(false);
     m_Controls.labelCorrecta->setVisible(false);
+    m_Controls.cbGenerico->setVisible(false);
 
     prepararResumen();
   }
@@ -432,11 +452,26 @@ void Game_Estructuras::CreateQtPartControl(QWidget* parent)
   connect(m_Controls.cbItem, SIGNAL(currentIndexChanged()), this, SLOT(onMostrarItem()));
   connect(m_Controls.rbEscenario, SIGNAL(clicked()),this,SLOT(onToggle()));
   connect(m_Controls.rbSoloTexto, SIGNAL(clicked()),this,SLOT(onToggle()));
+  connect(m_Controls.cbGenerico,SIGNAL(clicked()),this,SLOT(onGenerico()));
 
   changeScreen(INICIO);
 
   nodesView = new QLineEdit;
   itemsView = new QHBoxLayout;
+
+}
+void Game_Estructuras::onGenerico()
+{
+    if (m_Controls.cbGenerico->isChecked())
+    {
+        m_standard_options_flag = true;
+        m_Controls.lePreg->setEnabled(false);
+    }
+    else
+    {
+        m_standard_options_flag = false;
+        m_Controls.lePreg->setEnabled(true);
+    }
 
 }
 
@@ -503,6 +538,9 @@ void Game_Estructuras::onCrearJuego()
     standard_options_names.push_back("C");
     standard_options_names.push_back("D");
     standard_options_names.push_back("E");
+    m_standard_options_flag = false;
+    m_option_summary = "";
+    m_question_summary = "";
     MAX_OPCS=5;
     onAgregarItem();
     changeScreen(ESCRIBIR_PREG); //Screen de nueva pregunta
@@ -524,6 +562,8 @@ void Game_Estructuras::widgetToItemsView()
 */
 void Game_Estructuras::onConfirmar()
 {
+  cout<<"CONFIRMAR PRESIONADO: "<<current_screen<<" . Nitems: "<<N_items<<endl;
+
   if (current_screen==CARGADO)
   {
     onJugarDemo();
@@ -533,11 +573,13 @@ void Game_Estructuras::onConfirmar()
   if (current_screen==ESCRIBIR_PREG) //Pantalla de nueva pregunta
   {
     changeScreen(SELECCIONAR_OBJETOS_PREG);
+    onConfirmarPreg(0);
+
     return;
   }
   if (current_screen==SELECCIONAR_OBJETOS_PREG) //Pantalla de nueva pregunta
   {
-    onConfirmarPreg();
+    onConfirmarPreg(1);
     changeScreen(INICIO_RESPUESTA);
     return;
   }
@@ -549,17 +591,20 @@ void Game_Estructuras::onConfirmar()
   }
   if(current_screen==ESCRIBIR_OPC) //Pantalla de nueva opción
   {
+    agregarOpcion(0);
     changeScreen(SELECCIONAR_OBJETOS_OPC);
     return;
   }
   if(current_screen==SELECCIONAR_OBJETOS_OPC) //Pantalla de nueva opción
   {
+    agregarOpcion(1);
+
     changeScreen(DEFINIR_CORRECTA_OPC);
     return;
   }
   if(current_screen==DEFINIR_CORRECTA_OPC) //Pantalla de nueva opción
   {
-    agregarOpcion();
+    agregarOpcion(2);
     changeScreen(DEFINIR_PUNTOS);
     return;
   }
@@ -576,13 +621,16 @@ void Game_Estructuras::onConfirmar()
 }
 void Game_Estructuras::onAtras()
 {
+  cout<<"ATRAS PRESIONADO: "<<current_screen<<" . Nitems: "<<N_items<<endl;
   if(current_screen==CARGADO)
   {
     changeScreen(INICIO);
+
+
   }
   if (current_screen==ESCRIBIR_PREG)
   {
-    if(N_items==0)
+    if(N_items==1)
     {
       changeScreen(INICIO);
       return;
@@ -590,6 +638,7 @@ void Game_Estructuras::onAtras()
     else
     {
       onCancelarItem();
+      m_Controls.pbConfirmar->setEnabled(true);
       changeScreen(RESUMEN);
       return;
     }
@@ -597,6 +646,8 @@ void Game_Estructuras::onAtras()
   if(current_screen==SELECCIONAR_OBJETOS_PREG)
   {
     changeScreen(ESCRIBIR_PREG);
+    m_Controls.pbConfirmar->setEnabled(true);
+
     return;
   }
 
@@ -608,12 +659,15 @@ void Game_Estructuras::onAtras()
   if(current_screen==ESCRIBIR_OPC)
   {
     onCancelarItem();
+    m_Controls.pbConfirmar->setEnabled(true);
     changeScreen(INICIO_RESPUESTA);
     return;
   }
   if(current_screen==SELECCIONAR_OBJETOS_OPC)
   {
     changeScreen(ESCRIBIR_OPC);
+    m_Controls.pbConfirmar->setEnabled(true);
+
     return;
   }
   if(current_screen==DEFINIR_CORRECTA_OPC)
@@ -630,6 +684,8 @@ void Game_Estructuras::onAtras()
   {
     onAgregarItem();
     changeScreen(ESCRIBIR_PREG);
+    m_Controls.pbConfirmar->setEnabled(true);
+    return;
   }
 }
 void Game_Estructuras::onFlecha()
@@ -780,133 +836,157 @@ void Game_Estructuras::onCancelarJuego()
 
 
 
-void Game_Estructuras::onConfirmarPreg()
+void Game_Estructuras::onConfirmarPreg(int mode)
 {
-  bool found_content = false;
-  vector<std::string> list_of_node_names;
-  vector<mitk::Color> list_of_node_colors;
-
-  mitk::DataStorage::SetOfObjects::ConstPointer allNodes = GetDataStorage()->GetAll();
-  for (mitk::DataStorage::SetOfObjects::ConstIterator it = allNodes->Begin(); it != allNodes->End(); ++it)
-  {
-    mitk::DataNode *current_node = it->Value();
-    bool selected_flag=false;
-    current_node->GetBoolProperty("visible",selected_flag);
-    bool is_good=true;
-    if (current_node->GetName().find("std") != std::string::npos) {
-        is_good=false;
-    }
-    if (current_node->GetName().find("Pregunta") != std::string::npos) {
-        is_good=false;
-    }
-    if (current_node->GetName().find("Respuesta") != std::string::npos) {
-        is_good=false;
-    }
-   if (selected_flag && is_good)
+    if (mode==0)
     {
-      if(!found_content)
-      {
-        found_content=true;
-      }
-      list_of_node_names.push_back(current_node->GetName());
-      mitk::ColorProperty *colorProperty;
-      colorProperty=dynamic_cast<mitk::ColorProperty*>(current_node->GetProperty("color"));
-      list_of_node_colors.push_back(colorProperty->GetColor());
+        string name = "Pregunta" + std::to_string(N_items);
+        mitk::DataNode::Pointer nuevapregunta = GetDataStorage()->GetNamedNode(name);
+        if (!nuevapregunta)
+        {
+            nuevapregunta = mitk::DataNode::New();
+            mitk::Surface::Pointer gd = mitk::Surface::New();
+            vtkSmartPointer<vtkPoints> points =
+              vtkSmartPointer<vtkPoints>::New();
+            const float p[3] = {1.0, 2.0, 3.0};
+
+            // Create the topology of the point (a vertex)
+            vtkSmartPointer<vtkCellArray> vertices =
+              vtkSmartPointer<vtkCellArray>::New();
+            vtkIdType pid[1];
+            pid[0] = points->InsertNextPoint(p);
+            vertices->InsertNextCell(1,pid);
+
+            // Create a polydata object
+            vtkSmartPointer<vtkPolyData> point =
+              vtkSmartPointer<vtkPolyData>::New();
+
+            // Set the points and vertices we created as the geometry and topology of the polydata
+            point->SetPoints(points);
+            point->SetVerts(vertices);
+
+            gd->SetVtkPolyData(point);
+            nuevapregunta->SetData(gd);
+            nuevapregunta->SetVisibility(false);
+            gd->SetVtkPolyData(point);
+            nuevapregunta->SetData(gd);
+            nuevapregunta->SetBoolProperty("isQuestion", true);
+            string question_summary="";
+
+            QString str = m_Controls.lePreg->text();
+            if(str.isEmpty())
+            {
+              QMessageBox::warning(NULL, "Pregunta inválida", "Por favor escriba un texto.");
+              return;
+            }
+
+            std::string text = str.toStdString();
+            question_summary = question_summary + "Texto: '" + text +"'";
+            nuevapregunta->SetStringProperty("text",text.c_str());
+            nuevapregunta->SetIntProperty("itemNumber", int(N_items));
+            nuevapregunta->SetName(name);
+            nuevapregunta->Modified();
+
+            GetDataStorage()->Add(nuevapregunta);
+
+            m_question_summary = question_summary;
+
+            mitk::RenderingManager::GetInstance()->RequestUpdateAll();
+
+        }
+
+        string question_summary="";
+
+        QString str = m_Controls.lePreg->text();
+        if(str.isEmpty())
+        {
+          QMessageBox::warning(NULL, "Pregunta inválida", "Por favor escriba un texto.");
+          return;
+        }
+
+        std::string text = str.toStdString();
+        question_summary = question_summary + "Texto: '" + text +"'";
+        nuevapregunta->SetStringProperty("text",text.c_str());
+        nuevapregunta->Modified();
+
+        m_question_summary = question_summary;
+
+        mitk::RenderingManager::GetInstance()->RequestUpdateAll();
+
+        return;
     }
-  }
-
-  QString str = m_Controls.lePreg->text();
-  if(!str.isEmpty())
-  {
-    found_content=true;
-
-  }
-  if (!found_content)
-  {
-    QMessageBox::warning(NULL, "Pregunta inválida", "Por favor escriba un texto o ponga visible un nodo.");
-    return;
-  }
-  else
-  {
-
-    mitk::DataNode::Pointer nuevapregunta = mitk::DataNode::New();
-    mitk::Surface::Pointer gd = mitk::Surface::New();
-    vtkSmartPointer<vtkPoints> points =
-      vtkSmartPointer<vtkPoints>::New();
-    const float p[3] = {1.0, 2.0, 3.0};
-
-    // Create the topology of the point (a vertex)
-    vtkSmartPointer<vtkCellArray> vertices =
-      vtkSmartPointer<vtkCellArray>::New();
-    vtkIdType pid[1];
-    pid[0] = points->InsertNextPoint(p);
-    vertices->InsertNextCell(1,pid);
-
-    // Create a polydata object
-    vtkSmartPointer<vtkPolyData> point =
-      vtkSmartPointer<vtkPolyData>::New();
-
-    // Set the points and vertices we created as the geometry and topology of the polydata
-    point->SetPoints(points);
-    point->SetVerts(vertices);
-
-    gd->SetVtkPolyData(point);
-    nuevapregunta->SetData(gd);
-    nuevapregunta->SetVisibility(false);
-    gd->SetVtkPolyData(point);
-    nuevapregunta->SetData(gd);
-    nuevapregunta->SetBoolProperty("isQuestion", true);
-    string question_summary="";
-
-    std::string text = str.toStdString();
-    if (!text.empty())
+    if (mode==1)
     {
-      question_summary = question_summary + "Texto: '" + text +"'";
+        string name = "Pregunta" + std::to_string(N_items);
+        mitk::DataNode::Pointer nuevapregunta = GetDataStorage()->GetNamedNode(name);
+        if (m_Controls.rbSoloTexto->isChecked())
+        {
+            nuevapregunta->SetIntProperty("NumberOfNodes",0);
 
-    }
+            return;
+        }
+        else
+        {
 
-    if (!list_of_node_names.empty())
-    {
-      nuevapregunta->SetIntProperty("NumberOfNodes",list_of_node_names.size());
-      for(std::vector<int>::size_type i = 0; i != list_of_node_names.size(); i++)
-      {
-        GetDataStorage()->GetNamedNode(list_of_node_names[i])->SetVisibility(false);
-        GetDataStorage()->GetNamedNode(list_of_node_names[i])->Modified();
-        question_summary=question_summary + '\n' + list_of_node_names[i];
-        string prop_name = "nodo" + std::to_string(i);
-        string prop_name_color_R = "color_nodo_R" + std::to_string(i);
-        string prop_name_color_G = "color_nodo_G" + std::to_string(i);
-        string prop_name_color_B = "color_nodo_B" + std::to_string(i);
 
-        float col[3];
-        col[0] = list_of_node_colors[i].GetRed();
-        col[1] =list_of_node_colors[i].GetGreen();
-        col[2] =list_of_node_colors[i].GetBlue();
-        nuevapregunta->SetStringProperty(prop_name.c_str(),list_of_node_names[i].c_str());
-        nuevapregunta->SetFloatProperty(prop_name_color_R.c_str(),col[0]);
-        nuevapregunta->SetFloatProperty(prop_name_color_G.c_str(),col[1]);
-        nuevapregunta->SetFloatProperty(prop_name_color_B.c_str(),col[2]);
+            vector<std::string> list_of_node_names;
+            vector<mitk::Color> list_of_node_colors;
 
-      }
+            mitk::DataStorage::SetOfObjects::ConstPointer allNodes = GetDataStorage()->GetAll();
+            for (mitk::DataStorage::SetOfObjects::ConstIterator it = allNodes->Begin(); it != allNodes->End(); ++it)
+            {
+                mitk::DataNode *current_node = it->Value();
+                bool selected_flag=false;
+                current_node->GetBoolProperty("visible",selected_flag);
+                bool is_good=true;
+                if (current_node->GetName().find("std") != std::string::npos) {
+                    is_good=false;
+                }
+                if (current_node->GetName().find("Pregunta") != std::string::npos) {
+                    is_good=false;
+                }
+                if (current_node->GetName().find("Respuesta") != std::string::npos) {
+                    is_good=false;
+                }
+                if (selected_flag && is_good)
+                {
+                  list_of_node_names.push_back(current_node->GetName());
+                  mitk::ColorProperty *colorProperty;
+                  colorProperty=dynamic_cast<mitk::ColorProperty*>(current_node->GetProperty("color"));
+                  list_of_node_colors.push_back(colorProperty->GetColor());
+                }
+            }
 
-    }
-    else
-    {
-      nuevapregunta->SetIntProperty("NumberOfNodes",0);
-    }
+            if (list_of_node_names.empty())
+            {
+                nuevapregunta->SetIntProperty("NumberOfNodes",0);
+            }
+            else
+            {
+                nuevapregunta->SetIntProperty("NumberOfNodes",list_of_node_names.size());
+                for(std::vector<int>::size_type i = 0; i != list_of_node_names.size(); i++)
+                {
+                  GetDataStorage()->GetNamedNode(list_of_node_names[i])->SetVisibility(false);
+                  GetDataStorage()->GetNamedNode(list_of_node_names[i])->Modified();
+                  m_question_summary = m_question_summary + '\n' + list_of_node_names[i];
+                  string prop_name = "nodo" + std::to_string(i);
+                  string prop_name_color_R = "color_nodo_R" + std::to_string(i);
+                  string prop_name_color_G = "color_nodo_G" + std::to_string(i);
+                  string prop_name_color_B = "color_nodo_B" + std::to_string(i);
 
-    nuevapregunta->SetStringProperty("text",text.c_str());
-    nuevapregunta->SetIntProperty("itemNumber", int(N_items));
-    nuevapregunta->SetIntProperty("view",m_Controls.cbVistasPreg->currentIndex());
-    string name = "Pregunta" + std::to_string(N_items);
-    nuevapregunta->SetName(name);
-    nuevapregunta->Modified();
+                  float col[3];
+                  col[0] = list_of_node_colors[i].GetRed();
+                  col[1] =list_of_node_colors[i].GetGreen();
+                  col[2] =list_of_node_colors[i].GetBlue();
+                  nuevapregunta->SetStringProperty(prop_name.c_str(),list_of_node_names[i].c_str());
+                  nuevapregunta->SetFloatProperty(prop_name_color_R.c_str(),col[0]);
+                  nuevapregunta->SetFloatProperty(prop_name_color_G.c_str(),col[1]);
+                  nuevapregunta->SetFloatProperty(prop_name_color_B.c_str(),col[2]);
+                }
+            }
 
-    GetDataStorage()->Add(nuevapregunta);
-
-    m_question_summary = question_summary;
-
-    mitk::RenderingManager::GetInstance()->RequestUpdateAll();
+            nuevapregunta->SetIntProperty("view",m_Controls.cbVistasPreg->currentIndex());
+        }
 
   }
 }
@@ -921,158 +1001,183 @@ void Game_Estructuras::onAgregarItem()
 
 }
 
-void Game_Estructuras::agregarOpcion()
+void Game_Estructuras::agregarOpcion(int mode)
 {
-    bool found_content = false;
-    vector<std::string> list_of_node_names;
-    vector<mitk::Color> list_of_node_colors;
-
-    mitk::DataStorage::SetOfObjects::ConstPointer allNodes = GetDataStorage()->GetAll();
-    for (mitk::DataStorage::SetOfObjects::ConstIterator it = allNodes->Begin(); it != allNodes->End(); ++it)
+    if (mode==0)
     {
-      mitk::DataNode *current_node = it->Value();
-      bool selected_flag=false;
-      current_node->GetBoolProperty("visible",selected_flag);
-      bool is_good=true;
-      if (current_node->GetName().find("std") != std::string::npos) {
-          is_good=false;
-      }
-     if (selected_flag && is_good)
-      {
-        if(!found_content)
+
+        string name = "Respuesta" + std::to_string(N_items) +"-Opcion" + std::to_string(N_options[N_items-1]+1);
+
+        mitk::DataNode::Pointer nuevarespuesta = GetDataStorage()->GetNamedNode(name);
+        if (!nuevarespuesta)
         {
-          found_content=true;
+           nuevarespuesta = mitk::DataNode::New();
+           mitk::Surface::Pointer gd = mitk::Surface::New();
+           vtkSmartPointer<vtkPoints> points =
+             vtkSmartPointer<vtkPoints>::New();
+           const float p[3] = {1.0, 2.0, 3.0};
+
+           // Create the topology of the point (a vertex)
+           vtkSmartPointer<vtkCellArray> vertices =
+             vtkSmartPointer<vtkCellArray>::New();
+           vtkIdType pid[1];
+           pid[0] = points->InsertNextPoint(p);
+           vertices->InsertNextCell(1,pid);
+
+           // Create a polydata object
+           vtkSmartPointer<vtkPolyData> point =
+             vtkSmartPointer<vtkPolyData>::New();
+
+           // Set the points and vertices we created as the geometry and topology of the polydata
+           point->SetPoints(points);
+           point->SetVerts(vertices);
+
+           gd->SetVtkPolyData(point);
+           nuevarespuesta->SetData(gd);
+           nuevarespuesta->SetVisibility(false);
+           nuevarespuesta->SetBoolProperty("isQuestion", false);
+
+           nuevarespuesta->SetIntProperty("itemNumber", N_items);
+           nuevarespuesta->SetIntProperty("optionNumber",N_options[N_items-1]);
+
+           nuevarespuesta->SetName(name);
+           GetDataStorage()->Add(nuevarespuesta);
+
+
         }
-        list_of_node_names.push_back(current_node->GetName());
-        mitk::ColorProperty *colorProperty;
-        colorProperty=dynamic_cast<mitk::ColorProperty*>(current_node->GetProperty("color"));
-        list_of_node_colors.push_back(colorProperty->GetColor());
 
-
-      }
-    }
-
-    QString str = m_Controls.lePreg->text();
-
-    if(!str.isEmpty())
-    {
-      found_content=true;
-
-    }
-
-    if (!found_content)
-    {
-      QMessageBox::warning(NULL, "Pregunta inválida", "Por favor escriba un texto o ponga visible un nodo.");
-      return;
-    }
-    else
-    {
-
-      N_options[N_items-1]=N_options[N_items-1]+1;
-
-      mitk::DataNode::Pointer nuevarespuesta = mitk::DataNode::New();
-      mitk::Surface::Pointer gd = mitk::Surface::New();
-      vtkSmartPointer<vtkPoints> points =
-        vtkSmartPointer<vtkPoints>::New();
-      const float p[3] = {1.0, 2.0, 3.0};
-
-      // Create the topology of the point (a vertex)
-      vtkSmartPointer<vtkCellArray> vertices =
-        vtkSmartPointer<vtkCellArray>::New();
-      vtkIdType pid[1];
-      pid[0] = points->InsertNextPoint(p);
-      vertices->InsertNextCell(1,pid);
-
-      // Create a polydata object
-      vtkSmartPointer<vtkPolyData> point =
-        vtkSmartPointer<vtkPolyData>::New();
-
-      // Set the points and vertices we created as the geometry and topology of the polydata
-      point->SetPoints(points);
-      point->SetVerts(vertices);
-
-      gd->SetVtkPolyData(point);
-      nuevarespuesta->SetData(gd);
-      nuevarespuesta->SetVisibility(false);
-      nuevarespuesta->SetBoolProperty("isQuestion", false);
-      string extra="";
-
-      if(m_Controls.rbSI->isChecked())
-      {
-
-        m_flag_hay_correcta = true;
-        nuevarespuesta->SetBoolProperty("isCorrect",true);
-        extra = extra  +"CORRECTA";
-
-      }
-      else
-      {
-        nuevarespuesta->SetBoolProperty("isCorrect",false);
-      }
-      string option_summary="OPCION " + std::to_string(N_options[N_items-1]) + '\t' + '\t' +extra + '\n';
-      std::string text = str.toStdString();
-      if (!text.empty())
-      {
-        option_summary = option_summary + "Texto: '" + text +"'";
-
-      }
-      else
-      {
-        text = standard_options_names[N_options[N_items-1]-1];
-      }
-      if (!list_of_node_names.empty())
-      {
-        nuevarespuesta->SetIntProperty("NumberOfNodes",list_of_node_names.size());
-        for(std::vector<int>::size_type i = 0; i != list_of_node_names.size(); i++)
+        QString str = m_Controls.lePreg->text();
+        string option_summary="OPCION " + std::to_string(N_options[N_items-1]+1);
+        std::string text = str.toStdString();
+        if (text.empty()|| m_standard_options_flag)
         {
-          GetDataStorage()->GetNamedNode(list_of_node_names[i])->SetVisibility(false);
-          GetDataStorage()->GetNamedNode(list_of_node_names[i])->Modified();
-          option_summary=option_summary + '\n' + list_of_node_names[i];
-          string prop_name = "nodo" + std::to_string(i);
-          string prop_name_color_R = "color_nodo_R" + std::to_string(i);
-          string prop_name_color_G = "color_nodo_G" + std::to_string(i);
-          string prop_name_color_B = "color_nodo_B" + std::to_string(i);
-
-          float col[3];
-          col[0] = list_of_node_colors[i].GetRed();
-          col[1] =list_of_node_colors[i].GetGreen();
-          col[2] =list_of_node_colors[i].GetBlue();
-          nuevarespuesta->SetStringProperty(prop_name.c_str(),list_of_node_names[i].c_str());
-          nuevarespuesta->SetFloatProperty(prop_name_color_R.c_str(),col[0]);
-          nuevarespuesta->SetFloatProperty(prop_name_color_G.c_str(),col[1]);
-          nuevarespuesta->SetFloatProperty(prop_name_color_B.c_str(),col[2]);
+          text = standard_options_names[N_options[N_items-1]];
         }
-        option_summary=option_summary + '\n' + '\n';
-      }
-      else
-      {
-          nuevarespuesta->SetIntProperty("NumberOfNodes",0);
-      }
+        else
+        {
+          option_summary = option_summary + "Texto: '" + text +"'";
+        }
 
-      nuevarespuesta->SetStringProperty("text",text.c_str());
-      nuevarespuesta->SetIntProperty("itemNumber", N_items);
-      nuevarespuesta->SetIntProperty("optionNumber",N_options[N_items-1]);
-      nuevarespuesta->SetIntProperty("view",m_Controls.cbVistasPreg->currentIndex());
 
-      string name = "Respuesta" + std::to_string(N_items) +"-Opcion" + std::to_string(N_options[N_items-1]);
-      nuevarespuesta->SetName(name);
-      nuevarespuesta->Modified();
-      GetDataStorage()->Add(nuevarespuesta);
-      m_Controls.lePreg->setText("");
-      m_option_summary = m_option_summary + '\n'+ option_summary;
-      QString currentopts(option_summary.c_str());
+        m_option_summary = m_option_summary + '\n'+ option_summary;
+
+        nuevarespuesta->SetStringProperty("text",text.c_str());
+
+        nuevarespuesta->Modified();
+        mitk::RenderingManager::GetInstance()->RequestUpdateAll();
+
+
+        return;
+    }
+    if (mode==1)
+    {
+
+
+        string name = "Respuesta" + std::to_string(N_items) +"-Opcion" + std::to_string(N_options[N_items-1]+1);
+
+        mitk::DataNode::Pointer nuevarespuesta = GetDataStorage()->GetNamedNode(name);
+        if (m_Controls.rbSoloTexto->isChecked())
+        {
+            nuevarespuesta->SetIntProperty("NumberOfNodes",0);
+            return;
+        }
+        else
+        {
+            vector<std::string> list_of_node_names;
+            vector<mitk::Color> list_of_node_colors;
+
+            mitk::DataStorage::SetOfObjects::ConstPointer allNodes = GetDataStorage()->GetAll();
+            for (mitk::DataStorage::SetOfObjects::ConstIterator it = allNodes->Begin(); it != allNodes->End(); ++it)
+            {
+              mitk::DataNode *current_node = it->Value();
+              bool selected_flag=false;
+              current_node->GetBoolProperty("visible",selected_flag);
+              bool is_good=true;
+              if (current_node->GetName().find("std") != std::string::npos) {
+                  is_good=false;
+              }
+             if (selected_flag && is_good)
+              {
+                list_of_node_names.push_back(current_node->GetName());
+                mitk::ColorProperty *colorProperty;
+                colorProperty=dynamic_cast<mitk::ColorProperty*>(current_node->GetProperty("color"));
+                list_of_node_colors.push_back(colorProperty->GetColor());
+
+
+              }
+            }
+            if (!list_of_node_names.empty())
+            {
+
+              nuevarespuesta->SetIntProperty("NumberOfNodes",list_of_node_names.size());
+              for(std::vector<int>::size_type i = 0; i != list_of_node_names.size(); i++)
+              {
+                GetDataStorage()->GetNamedNode(list_of_node_names[i])->SetVisibility(false);
+                GetDataStorage()->GetNamedNode(list_of_node_names[i])->Modified();
+                m_option_summary=m_option_summary + '\n' + list_of_node_names[i];
+                string prop_name = "nodo" + std::to_string(i);
+                string prop_name_color_R = "color_nodo_R" + std::to_string(i);
+                string prop_name_color_G = "color_nodo_G" + std::to_string(i);
+                string prop_name_color_B = "color_nodo_B" + std::to_string(i);
+
+                float col[3];
+                col[0] = list_of_node_colors[i].GetRed();
+                col[1] =list_of_node_colors[i].GetGreen();
+                col[2] =list_of_node_colors[i].GetBlue();
+                nuevarespuesta->SetStringProperty(prop_name.c_str(),list_of_node_names[i].c_str());
+                nuevarespuesta->SetFloatProperty(prop_name_color_R.c_str(),col[0]);
+                nuevarespuesta->SetFloatProperty(prop_name_color_G.c_str(),col[1]);
+                nuevarespuesta->SetFloatProperty(prop_name_color_B.c_str(),col[2]);
+              }
+              m_option_summary=m_option_summary + '\n' + '\n';
+            }
+            else
+            {
+                nuevarespuesta->SetIntProperty("NumberOfNodes",0);
+            }
+
+            nuevarespuesta->SetIntProperty("view",m_Controls.cbVistasPreg->currentIndex());
+
+            return;
+        }
+    }
+    if (mode==2)
+    {
+        string extra="";
+        string name = "Respuesta" + std::to_string(N_items) +"-Opcion" + std::to_string(N_options[N_items-1]+1);
+        mitk::DataNode::Pointer nuevarespuesta = GetDataStorage()->GetNamedNode(name);
+        if(m_Controls.rbSI->isChecked())
+        {
+
+          m_flag_hay_correcta = true;
+          nuevarespuesta->SetBoolProperty("isCorrect",true);
+          extra = extra  +"CORRECTA";
+
+        }
+        else
+        {
+          nuevarespuesta->SetBoolProperty("isCorrect",false);
+        }
+        m_option_summary = m_option_summary+ '\t' + '\t' +extra + '\n';
+        N_options[N_items-1]=N_options[N_items-1]+1;
+
+        if (N_options[N_items-1]==MAX_OPCS)
+        {
+          m_Controls.pbOtraOpcion->setEnabled(false);
+        }
+        mitk::RenderingManager::GetInstance()->RequestUpdateAll();
+        return;
+    }
+
       //m_Controls.label_currentoptions->append(currentopts);
-      mitk::RenderingManager::GetInstance()->RequestUpdateAll();
 
-      if (N_options[N_items-1]==MAX_OPCS)
-      {
-        m_Controls.pbOtraOpcion->setEnabled(false);
-      }
-    }
+
+
+
 }
 void Game_Estructuras::onAgregarOpcion()
 {
-  agregarOpcion();
+  agregarOpcion(2);
   changeScreen(ESCRIBIR_OPC);
 }
 
@@ -1102,6 +1207,7 @@ void Game_Estructuras::onConfirmarItem()
     {
       N_items--;
     }
+    changeScreen(ESCRIBIR_OPC);
     return;
   }
 
