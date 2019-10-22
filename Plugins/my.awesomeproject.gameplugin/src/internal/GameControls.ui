@@ -42,56 +42,37 @@
     </widget>
    </item>
    <item row="5" column="1">
+    <widget class="QLabel" name="pregunta">
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="1">
     <widget class="QLabel" name="indicacion">
      <property name="text">
       <string>Escribir pregunta:</string>
      </property>
     </widget>
    </item>
-   <item row="6" column="1">
-    <widget class="QLineEdit" name="lePreg">
-     <property name="enabled">
-      <bool>true</bool>
+   <item row="7" column="1">
+    <widget class="QCheckBox" name="cbGenerico">
+     <property name="text">
+      <string>Sin texto</string>
      </property>
     </widget>
    </item>
-   <item row="8" column="1">
-    <spacer name="verticalSpacer_2">
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>20</width>
-       <height>40</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
-   <item row="9" column="1">
+   <item row="10" column="1">
     <widget class="QGroupBox" name="groupBoxEscenario">
      <property name="minimumSize">
       <size>
        <width>0</width>
-       <height>100</height>
+       <height>180</height>
       </size>
      </property>
      <property name="title">
       <string/>
      </property>
-     <widget class="QRadioButton" name="rbEscenario">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>20</y>
-        <width>191</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Incluir escenario virtual</string>
-      </property>
-     </widget>
      <widget class="QComboBox" name="cbVistasPreg">
       <property name="enabled">
        <bool>true</bool>
@@ -99,8 +80,8 @@
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>40</y>
-        <width>421</width>
+        <y>60</y>
+        <width>151</width>
         <height>25</height>
        </rect>
       </property>
@@ -128,64 +109,94 @@
        </property>
       </item>
      </widget>
-     <widget class="QRadioButton" name="rbSoloTexto">
+     <widget class="QCheckBox" name="cbEscenario">
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>70</y>
-        <width>112</width>
+        <y>30</y>
+        <width>371</width>
         <height>23</height>
        </rect>
       </property>
       <property name="text">
-       <string>Solo texto</string>
+       <string>Incluir escenario virtual</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="labelScore">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>110</y>
+        <width>421</width>
+        <height>26</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Score:</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+     <widget class="QSpinBox" name="leScore">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>140</y>
+        <width>121</width>
+        <height>26</height>
+       </rect>
+      </property>
+      <property name="maximum">
+       <number>1000</number>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="rbSI">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>140</y>
+        <width>441</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>SI</string>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="rbNO">
+      <property name="geometry">
+       <rect>
+        <x>140</x>
+        <y>140</y>
+        <width>441</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>NO</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="aclaracion">
+      <property name="geometry">
+       <rect>
+        <x>210</x>
+        <y>40</y>
+        <width>221</width>
+        <height>71</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
       </property>
      </widget>
     </widget>
    </item>
-   <item row="10" column="1">
-    <widget class="QLabel" name="indicacion2">
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
-   </item>
    <item row="11" column="1">
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <property name="topMargin">
-      <number>0</number>
-     </property>
-     <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_9">
-       <property name="bottomMargin">
-        <number>0</number>
-       </property>
-       <item>
-        <widget class="QLabel" name="labelScore">
-         <property name="text">
-          <string>Score:</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QSpinBox" name="leScore">
-         <property name="enabled">
-          <bool>true</bool>
-         </property>
-         <property name="maximum">
-          <number>1000</number>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-    </layout>
-   </item>
-   <item row="13" column="1">
-    <spacer name="verticalSpacer_3">
+    <spacer name="verticalSpacer_2">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
      </property>
@@ -198,121 +209,12 @@
     </spacer>
    </item>
    <item row="14" column="1">
-    <widget class="QLabel" name="teItem">
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
-   </item>
-   <item row="15" column="1">
     <widget class="QComboBox" name="cbItem"/>
    </item>
-   <item row="16" column="1">
-    <layout class="QHBoxLayout" name="horizontalLayout_6">
-     <property name="bottomMargin">
-      <number>0</number>
-     </property>
-     <item>
-      <widget class="QPushButton" name="pbFlecha">
-       <property name="enabled">
-        <bool>true</bool>
-       </property>
-       <property name="text">
-        <string>Agregar Flecha</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="pbPunto">
-       <property name="enabled">
-        <bool>true</bool>
-       </property>
-       <property name="text">
-        <string>Agregar Punto</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
+   <item row="15" column="1">
+    <widget class="QTextBrowser" name="textResumen"/>
    </item>
-   <item row="17" column="1">
-    <widget class="QGroupBox" name="radioButtonsBox">
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>80</height>
-      </size>
-     </property>
-     <property name="title">
-      <string/>
-     </property>
-     <widget class="QRadioButton" name="rbSI">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>50</y>
-        <width>441</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>SI</string>
-      </property>
-     </widget>
-     <widget class="QRadioButton" name="rbNO">
-      <property name="geometry">
-       <rect>
-        <x>100</x>
-        <y>50</y>
-        <width>441</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>NO</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="labelCorrecta">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>30</y>
-        <width>201</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>¿Esta es la opción correcta?</string>
-      </property>
-     </widget>
-    </widget>
-   </item>
-   <item row="20" column="1">
-    <spacer name="verticalSpacer_5">
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>20</width>
-       <height>40</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
-   <item row="23" column="1">
-    <spacer name="verticalSpacer">
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>20</width>
-       <height>40</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
-   <item row="24" column="1">
+   <item row="22" column="1">
     <layout class="QHBoxLayout" name="horizontalLayout_8">
      <property name="bottomMargin">
       <number>0</number>
@@ -349,10 +251,26 @@
      </item>
     </layout>
    </item>
-   <item row="7" column="1">
-    <widget class="QCheckBox" name="cbGenerico">
-     <property name="text">
-      <string>Item genérico (i.e.: A, B, C, D, etc)</string>
+   <item row="23" column="1">
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="8" column="1">
+    <widget class="QTextEdit" name="lePreg">
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>100</height>
+      </size>
      </property>
     </widget>
    </item>

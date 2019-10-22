@@ -86,6 +86,7 @@ private slots:
   void onCrearJuego();
   void onAgregarItem();
   void onConfirmarPreg(int mode);
+  void onSimpleConfirmarPreg();
   void onAgregarOpcion();
   void onEliminarItem();
   void onCancelarJuego();
@@ -95,8 +96,6 @@ private slots:
   void onStart();
   void onMostrarItem(int i);
   void onCargarJuego();
-  void onFlecha();
-  void onPunto();
   void onAtras();
   void onConfirmar();
   void onToggle();
@@ -107,6 +106,7 @@ private:
   void SetFocus() override;
   //void widgetToNodesView();
   //void widgetToItemsView();
+  void simpleAgregarOpcion();
   void agregarOpcion(int mode);
   void changeScreen(int);
   void prepararResumen();

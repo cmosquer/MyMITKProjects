@@ -183,13 +183,13 @@ void GamePlay::SetItemWidgetInLayout(mitk::DataNode::Pointer itemNode, QLayout *
 {
 
   bool isquestion = false;
-  itemNode->GetBoolProperty("isQuestion", isquestion);
+  itemNode->GetBoolProperty("medicas.gaming.isQuestion", isquestion);
 
   int n_nodes;
-  itemNode->GetIntProperty("NumberOfNodes", n_nodes);
+  itemNode->GetIntProperty("medicas.gaming.NumberOfNodes", n_nodes);
 
   std::string text;
-  itemNode->GetStringProperty("text",text);
+  itemNode->GetStringProperty("medicas.gaming.text",text);
   if(isquestion)
   {
 
@@ -209,17 +209,17 @@ void GamePlay::SetItemWidgetInLayout(mitk::DataNode::Pointer itemNode, QLayout *
   {
     mitk::StandaloneDataStorage::Pointer ds = mitk::StandaloneDataStorage::New();
     int view;
-    itemNode->GetIntProperty("view",view);
+    itemNode->GetIntProperty("medicas.gaming.view",view);
     QmitkRenderWindow *widget3D = new QmitkRenderWindow(this->parentWidget());
     QmitkSliceWidget *widget_slice = new QmitkSliceWidget(this->parentWidget());
     QmitkRenderWindow *mitkWidget1 = new QmitkRenderWindow(this->parentWidget());
     //ADD ALL NODES TO NEW DATA STORAGE
     for (int i = 0; i<n_nodes; i++)
     {
-      std::string prop_name = "nodo" + std::to_string(i);
-      std::string prop_name_color_R = "color_nodo_R" + std::to_string(i);
-      std::string prop_name_color_G = "color_nodo_G" + std::to_string(i);
-      std::string prop_name_color_B = "color_nodo_B" + std::to_string(i);
+      std::string prop_name = "medicas.gaming.nodo" + std::to_string(i);
+      std::string prop_name_color_R = "cmedicas.gaming.olor_nodo_R" + std::to_string(i);
+      std::string prop_name_color_G = "medicas.gaming.color_nodo_G" + std::to_string(i);
+      std::string prop_name_color_B = "medicas.gaming.color_nodo_B" + std::to_string(i);
       std::string node_name;
       itemNode->GetStringProperty(prop_name.c_str(),node_name);
       float col[3];
@@ -323,7 +323,7 @@ void GamePlay::SetItemWidgetInLayout(mitk::DataNode::Pointer itemNode, QLayout *
       layout->addWidget(pb);
       connect(pb, SIGNAL (clicked()),this, SLOT(onClickOption()));
       bool iscorrect=false;
-      itemNode->GetBoolProperty("isCorrect",iscorrect);
+      itemNode->GetBoolProperty("medicas.gaming.isCorrect",iscorrect);
       if(iscorrect)
       {
         m_correct_answer = pb;
@@ -361,7 +361,7 @@ void GamePlay::PlayItem(int i)
     //labeltitle->setGeometry(10,10,200,100);
     //layout->setSizeConstraint(QLayout::SetMinimumSize);
     questionTitle_layout->update();
-    questionNode->GetIntProperty("score",current_item_score);
+    questionNode->GetIntProperty("medicas.gaming.score",current_item_score);
     SetItemWidgetInLayout(questionNode, question_layout);
 
 
