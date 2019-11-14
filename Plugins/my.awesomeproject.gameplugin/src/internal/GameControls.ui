@@ -124,7 +124,7 @@ p, li { white-space: pre-wrap; }
      </item>
     </layout>
    </item>
-   <item row="10" column="1">
+   <item row="12" column="1">
     <layout class="QVBoxLayout" name="verticalLayout_3">
      <property name="bottomMargin">
       <number>0</number>
@@ -162,7 +162,7 @@ p, li { white-space: pre-wrap; }
      </item>
     </layout>
    </item>
-   <item row="14" column="1">
+   <item row="16" column="1">
     <spacer name="verticalSpacer_2">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -175,7 +175,7 @@ p, li { white-space: pre-wrap; }
      </property>
     </spacer>
    </item>
-   <item row="23" column="1">
+   <item row="25" column="1">
     <spacer name="verticalSpacer_3">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -188,7 +188,7 @@ p, li { white-space: pre-wrap; }
      </property>
     </spacer>
    </item>
-   <item row="28" column="1">
+   <item row="30" column="1">
     <spacer name="verticalSpacer_4">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -201,7 +201,7 @@ p, li { white-space: pre-wrap; }
      </property>
     </spacer>
    </item>
-   <item row="32" column="1">
+   <item row="34" column="1">
     <layout class="QHBoxLayout" name="horizontalLayout_8">
      <property name="bottomMargin">
       <number>0</number>
@@ -238,7 +238,7 @@ p, li { white-space: pre-wrap; }
      </item>
     </layout>
    </item>
-   <item row="33" column="1">
+   <item row="35" column="1">
     <spacer name="verticalSpacer">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -251,7 +251,7 @@ p, li { white-space: pre-wrap; }
      </property>
     </spacer>
    </item>
-   <item row="18" column="1">
+   <item row="20" column="1">
     <layout class="QVBoxLayout" name="verticalLayout_6">
      <property name="bottomMargin">
       <number>0</number>
@@ -271,7 +271,7 @@ p, li { white-space: pre-wrap; }
      </item>
     </layout>
    </item>
-   <item row="24" column="1">
+   <item row="26" column="1">
     <layout class="QVBoxLayout" name="verticalLayout_4">
      <property name="bottomMargin">
       <number>0</number>
@@ -300,6 +300,9 @@ p, li { white-space: pre-wrap; }
        </item>
        <item>
         <widget class="QPushButton" name="pbMostrar">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="text">
           <string>Mostrar escenario virtual</string>
          </property>
@@ -308,6 +311,32 @@ p, li { white-space: pre-wrap; }
       </layout>
      </item>
     </layout>
+   </item>
+   <item row="11" column="1">
+    <spacer name="verticalSpacer_5">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="10" column="1">
+    <spacer name="verticalSpacer_6">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
    </item>
   </layout>
  </widget>

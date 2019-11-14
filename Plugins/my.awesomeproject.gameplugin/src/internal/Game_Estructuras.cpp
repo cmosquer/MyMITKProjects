@@ -550,7 +550,7 @@ void Game_Estructuras::onEliminarItem()
   bool completeItem = false;
   if (m_Controls.cbOpcion->itemText(item-1).toStdString().find("Pregunta") != string::npos)
   {
-      std::string message = "Seleccionó eliminar la pregunta " + std::to_string(item) +".\n Esto eliminará todo el item correspondiente, incluyendo las respuestas.";
+      std::string message = "Seleccionó eliminar la pregunta " + std::to_string(item-1) +".\n Esto eliminará todo el item correspondiente, incluyendo las respuestas.";
       msgBox.setText(message.c_str());
       msgBox.setInformativeText("¿Desea confirmarlo?");
       msgBox.setStandardButtons(QMessageBox::Cancel|QMessageBox::Yes);
