@@ -19,12 +19,10 @@ See LICENSE.txt or http://www.mitk.org for details.
 
 #include <QmitkAbstractView.h>
 #include <mitkSurface.h>
-#include "vtkRANSACPlane.h"
 #include <vector>
 #include <vtkSmartPointer.h>
 #include <mitkLookupTable.h>
 #include <mitkPointSet.h>
-#include <mitkLabelSetImage.h>
 #include <qtablewidget.h>
 #include <QTableWidget>
 //#include <QVTKWidget.h>
@@ -40,8 +38,6 @@ See LICENSE.txt or http://www.mitk.org for details.
 #include <ui_GamePlay.h>
 #include "GamePlay.h"
 
-#include<bits/stdc++.h>
-using namespace std;
 
 // All views in MITK derive from QmitkAbstractView. You have to override
 // at least the two methods CreateQtPartControl() and SetFocus().
@@ -71,7 +67,7 @@ public:
 
   //Widget de Play:
   QWidget *playWidget;
-  vector<QVTKOpenGLWidget*> vtkWindows;
+  std::vector<QVTKOpenGLWidget*> vtkWindows;
   QPushButton *pbStart;
    /*
   QPushButton *pbExport;
@@ -94,12 +90,13 @@ private slots:
   void onCancelarItem();
   void onJugarDemo();
   void onStart();
-  void onMostrarItem(int i);
   void onCargarJuego();
   void onAtras();
   void onConfirmar();
   void onToggle();
   void onGenerico();
+  void onMostrar();
+  void onResumen();
 
 private:
   // Typically a one-liner. Set the focus to the default widget.
@@ -110,7 +107,8 @@ private:
   void agregarOpcion(int mode);
   void changeScreen(int);
   void prepararResumen();
-
+  void mostrarItem(int i);
+  void deleteCorrectAnswer();
   // This method is conveniently called whenever the selection of Data Manager
   // items changes.
 //  void OnSelectionChanged(
@@ -121,17 +119,17 @@ private:
   GamePlay *m_Play;
   //HighlightStructureInteractor::Pointer             m_CurrentInteractor;
   unsigned long N_items;
-  string game_name;
-  vector <unsigned long> N_options;
+  std::string game_name;
+  std::vector <unsigned long> N_options;
   //mitk::DataNode::Pointer m_currentQuestion;
   //vector <mitk::DataNode::Pointer> m_currentAnswer;
   bool m_flag_hay_correcta;
   bool m_standard_options_flag;
   int current_screen;
-  string m_option_summary;
-  string m_question_summary;
-  vector <std::string> items_summaries;
-  vector <std::string> standard_options_names;
+  std::string m_option_summary;
+  std::string m_question_summary;
+  std::vector <std::string> items_summaries;
+  std::vector <std::string> standard_options_names;
   QLineEdit *nodesView;
   QHBoxLayout *itemsView;
   int MAX_OPCS;

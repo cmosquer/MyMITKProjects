@@ -217,9 +217,11 @@ void GamePlay::SetItemWidgetInLayout(mitk::DataNode::Pointer itemNode, QLayout *
     for (int i = 0; i<n_nodes; i++)
     {
       std::string prop_name = "medicas.gaming.nodo" + std::to_string(i);
-      std::string prop_name_color_R = "cmedicas.gaming.olor_nodo_R" + std::to_string(i);
+      std::string prop_name_color_R = "medicas.gaming.color_nodo_R" + std::to_string(i);
       std::string prop_name_color_G = "medicas.gaming.color_nodo_G" + std::to_string(i);
       std::string prop_name_color_B = "medicas.gaming.color_nodo_B" + std::to_string(i);
+      std::string prop_opacity = "medicas.gaming.opacity" + std::to_string(i);
+
       std::string node_name;
       itemNode->GetStringProperty(prop_name.c_str(),node_name);
       float col[3];
@@ -235,7 +237,7 @@ void GamePlay::SetItemWidgetInLayout(mitk::DataNode::Pointer itemNode, QLayout *
       if (to_copy)
       {
         node->SetData(to_copy->GetData());
-        node->SetProperty("opacity",to_copy->GetProperty("opacity"));
+        node->SetProperty("opacity",to_copy->GetProperty(prop_opacity.c_str()));
         node->SetColor(colmitk);
         node->SetVisibility(true, widget3D->GetRenderer());
         node->SetVisibility(true, widget_slice->GetRenderer());

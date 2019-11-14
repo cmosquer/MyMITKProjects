@@ -93,7 +93,8 @@ void Game_Estructuras::changeScreen(int scr)
     QFont questiontitle;
     questiontitle.setPointSize(18);
     questiontitle.setBold(true);
-
+    m_Controls.rbSI->setVisible(false);
+    m_Controls.rbNO->setVisible(false);
     m_Controls.labelTitulo->setFont(questiontitle);
 
     m_Controls.pbCrear->setVisible(true);
@@ -101,15 +102,22 @@ void Game_Estructuras::changeScreen(int scr)
     m_Controls.pbAtras->setVisible(false);
     m_Controls.pbConfirmar->setVisible(false);
     m_Controls.pbOtraOpcion->setVisible(false);
-    m_Controls.groupBoxEscenario->setVisible(false);
+    m_Controls.pbEliminar->setVisible(false);
+    m_Controls.pbMostrar->setVisible(false);
     m_Controls.labelScore->setVisible(false);
     m_Controls.indicacion->setVisible(false);
     m_Controls.lePreg->setVisible(false);
     m_Controls.leScore->setVisible(false);
+    m_Controls.cbOpcion->setVisible(false);
     m_Controls.cbItem->setVisible(false);
     m_Controls.textResumen->setVisible(false);
     m_Controls.pregunta->setVisible(false);
     m_Controls.cbGenerico->setVisible(false);
+    m_Controls.cbEscenario->setVisible(false);
+    m_Controls.cbVistasPreg->setVisible(false);
+    m_Controls.aclaracion->setVisible(false);
+    m_Controls.labelItems->setVisible(false);
+    m_Controls.labelResumen->setVisible(false);
 
 
   }
@@ -125,14 +133,20 @@ void Game_Estructuras::changeScreen(int scr)
     m_Controls.pbConfirmar->setEnabled(true);
     m_Controls.pbConfirmar->setVisible(true);
     m_Controls.pbOtraOpcion->setVisible(false);
-    m_Controls.groupBoxEscenario->setVisible(false);
     m_Controls.labelScore->setVisible(false);
     m_Controls.indicacion->setVisible(false);
     m_Controls.lePreg->setVisible(false);
     m_Controls.leScore->setVisible(false);
+    m_Controls.cbOpcion->setVisible(false);
     m_Controls.cbItem->setVisible(false);
     m_Controls.textResumen->setVisible(false);
     m_Controls.cbGenerico->setVisible(false);
+    m_Controls.pbEliminar->setVisible(false);
+    m_Controls.pbMostrar->setVisible(false);
+    m_Controls.rbSI->setVisible(false);
+    m_Controls.rbNO->setVisible(false);
+    m_Controls.labelItems->setVisible(false);
+    m_Controls.labelResumen->setVisible(false);
   }
 
   if(scr==ESCRIBIR_PREG)
@@ -141,7 +155,8 @@ void Game_Estructuras::changeScreen(int scr)
     m_Controls.labelTitulo->setText(tit.c_str());    
     m_Controls.pbCrear->setVisible(false);
     m_Controls.pbCargarJuego->setVisible(false);
-
+    m_Controls.pbEliminar->setVisible(false);
+    m_Controls.pbMostrar->setVisible(false);
     m_Controls.indicacion->setVisible(true);
     m_Controls.indicacion->setText("Escriba la pregunta");
     m_Controls.lePreg->setVisible(true);
@@ -158,7 +173,6 @@ void Game_Estructuras::changeScreen(int scr)
     m_Controls.pbConfirmar->setVisible(true);
     m_Controls.pbOtraOpcion->setVisible(false);
 
-    m_Controls.groupBoxEscenario->setVisible(true);
     m_Controls.labelScore->setVisible(true);
     m_Controls.leScore->setVisible(true);
     m_Controls.leScore->setValue(100);
@@ -166,9 +180,17 @@ void Game_Estructuras::changeScreen(int scr)
 
     m_Controls.rbSI->setVisible(false);
     m_Controls.rbNO->setVisible(false);
+
+    m_Controls.cbOpcion->setVisible(false);
     m_Controls.cbItem->setVisible(false);
     m_Controls.textResumen->setVisible(false);
     m_Controls.pregunta->setVisible(false);
+    m_Controls.cbEscenario->setChecked(false);
+    m_Controls.cbEscenario->setVisible(true);
+    m_Controls.cbVistasPreg->setVisible(true);
+    m_Controls.cbVistasPreg->setEnabled(false);
+    m_Controls.labelItems->setVisible(false);
+    m_Controls.labelResumen->setVisible(false);
   }
   if(scr==INICIO_RESPUESTA)
   {
@@ -182,17 +204,23 @@ void Game_Estructuras::changeScreen(int scr)
     m_Controls.pbConfirmar->setText("Crear primera opción de respuesta");
     m_Controls.pbConfirmar->setVisible(true);
     m_Controls.pbOtraOpcion->setVisible(false);
+    m_Controls.pbEliminar->setVisible(false);
+    m_Controls.pbMostrar->setVisible(false);
 
-    m_Controls.groupBoxEscenario->setVisible(false);
     m_Controls.labelScore->setVisible(false);
     m_Controls.indicacion->setVisible(true);
     m_Controls.indicacion->setText("A continuación, vamos a crear una por una las opciones \nmultiple-choice para esta pregunta.");
     m_Controls.lePreg->setVisible(false);
     m_Controls.leScore->setVisible(false);
+
+    m_Controls.cbOpcion->setVisible(false);
     m_Controls.cbItem->setVisible(false);
     m_Controls.textResumen->setVisible(false);
     m_Controls.cbGenerico->setVisible(false);
-    m_Controls.cbEscenario->setChecked(false);
+    m_Controls.cbEscenario->setVisible(false);
+    m_Controls.cbVistasPreg->setVisible(false);
+    m_Controls.labelItems->setVisible(false);
+    m_Controls.labelResumen->setVisible(false);
 
   }
   if(scr==ESCRIBIR_OPC)
@@ -205,15 +233,19 @@ void Game_Estructuras::changeScreen(int scr)
     m_Controls.pbCrear->setVisible(false);
     m_Controls.pbCargarJuego->setVisible(false);
     m_Controls.pbAtras->setVisible(true);
-    m_Controls.pbAtras->setText("Cancelar");
-    m_Controls.pbConfirmar->setText("Listo, última opción");
+    m_Controls.pbAtras->setText("Cancelar pregunta");
+    m_Controls.pbConfirmar->setText("Listo, es la última opción");
     m_Controls.pbConfirmar->setVisible(true);
     m_Controls.pbOtraOpcion->setVisible(true);
+    m_Controls.pbEliminar->setVisible(false);
+    m_Controls.pbMostrar->setVisible(false);
 
-    m_Controls.groupBoxEscenario->setVisible(true);
     m_Controls.pregunta->setVisible(true);
     m_Controls.lePreg->setVisible(true);
     m_Controls.lePreg->setEnabled(true);
+    m_Controls.cbEscenario->setVisible(true);
+    m_Controls.cbVistasPreg->setVisible(true);
+    m_Controls.cbVistasPreg->setEnabled(false);
 
     m_Controls.indicacion->setVisible(true);
     m_Controls.indicacion->setText("Escriba el texto para esta opción.");
@@ -222,7 +254,8 @@ void Game_Estructuras::changeScreen(int scr)
     m_Controls.cbGenerico->setEnabled(true);
     m_Controls.cbGenerico->setVisible(true);
     m_Controls.cbGenerico->setChecked(false);
-
+    m_Controls.labelItems->setVisible(false);
+    m_Controls.labelResumen->setVisible(false);
     m_Controls.cbEscenario->setChecked(false);
     m_Controls.cbEscenario->setEnabled(true);
 
@@ -234,6 +267,7 @@ void Game_Estructuras::changeScreen(int scr)
     m_Controls.rbSI->setVisible(true);
     m_Controls.rbSI->setChecked(false);
 
+    m_Controls.cbOpcion->setVisible(false);
     m_Controls.cbItem->setVisible(false);
     m_Controls.textResumen->setVisible(false);
 
@@ -244,7 +278,8 @@ void Game_Estructuras::changeScreen(int scr)
     std::string tit = "RESUMEN DE JUEGO";
     m_Controls.labelTitulo->setText(tit.c_str());
     m_Controls.cbEscenario->setChecked(false);
-
+    m_Controls.cbEscenario->setVisible(false);
+    m_Controls.cbVistasPreg->setVisible(false);
     m_Controls.pbCrear->setVisible(false);
     m_Controls.pbCargarJuego->setVisible(false);
     m_Controls.pbAtras->setVisible(true);
@@ -252,8 +287,9 @@ void Game_Estructuras::changeScreen(int scr)
     m_Controls.pbConfirmar->setText("Jugar demo");
     m_Controls.pbConfirmar->setVisible(true);
     m_Controls.pbOtraOpcion->setVisible(false);
-
-    m_Controls.groupBoxEscenario->setVisible(false);
+    m_Controls.pbEliminar->setVisible(true);
+    m_Controls.pbMostrar->setVisible(true);
+    m_Controls.cbOpcion->setVisible(true);
     m_Controls.labelScore->setVisible(false);
     m_Controls.indicacion->setVisible(false);
     m_Controls.pregunta->setVisible(false);
@@ -262,23 +298,13 @@ void Game_Estructuras::changeScreen(int scr)
     m_Controls.cbItem->setVisible(true);
     m_Controls.textResumen->setVisible(true);
     m_Controls.cbGenerico->setVisible(false);
-
-    prepararResumen();
+    m_Controls.labelItems->setVisible(true);
+    m_Controls.labelResumen->setVisible(true);
+    m_Controls.aclaracion->setVisible(false);
+    onResumen();
   }
 }
-void Game_Estructuras::prepararResumen()
-{
-  /*ARmar para que muestre pregunta y texto de opcineos de cada item
-  QString currentitems(items_summaries[item-1].c_str());
-  m_Controls.teObjetos->setText(currentitems);
-  */
-  for(int i=0;i<N_items;i++)
-  {
-    //TERMINARRRRRRRR
-      cout<<"Sin implementar todavia"<<endl;
 
-  }
-}
 
 void Game_Estructuras::CreateQtPartControl(QWidget* parent)
 {
@@ -291,9 +317,11 @@ void Game_Estructuras::CreateQtPartControl(QWidget* parent)
   connect(m_Controls.pbConfirmar, SIGNAL (clicked()),this, SLOT(onConfirmar())); //Confirmar la pregunta con los datos introducidos
   connect(m_Controls.pbOtraOpcion, SIGNAL (clicked()),this, SLOT(onAgregarOpcion())); //Si esta el RB de respuesta con opciones, agrega opcion segun datos introducidos
   connect(m_Controls.pbAtras, SIGNAL (clicked()),this, SLOT(onAtras()));
-  connect(m_Controls.cbItem, SIGNAL(currentIndexChanged()), this, SLOT(onMostrarItem()));
+  connect(m_Controls.cbItem, SIGNAL(currentIndexChanged(int)), this, SLOT(onResumen()));
   connect(m_Controls.cbEscenario, SIGNAL(clicked()),this,SLOT(onToggle()));
   connect(m_Controls.cbGenerico,SIGNAL(clicked()),this,SLOT(onGenerico()));
+  connect(m_Controls.pbMostrar,SIGNAL(clicked()),this,SLOT(onMostrar()));
+  connect(m_Controls.pbEliminar,SIGNAL(clicked()),this,SLOT(onEliminarItem()));
 
   changeScreen(INICIO);
 
@@ -328,10 +356,13 @@ void Game_Estructuras::onToggle()
         aclaracion.setItalic(true);
         m_Controls.aclaracion->setFont(aclaracion);
         m_Controls.aclaracion->setVisible(true);
+        m_Controls.cbVistasPreg->setEnabled(true);
     }
     else
     {
         m_Controls.aclaracion->setVisible(false);
+        m_Controls.cbVistasPreg->setEnabled(false);
+
     }
 }
 
@@ -413,8 +444,9 @@ void Game_Estructuras::onConfirmar()
 
   if (current_screen==ESCRIBIR_PREG) //Pantalla de nueva pregunta
   {
-    changeScreen(INICIO_RESPUESTA);
+
     onSimpleConfirmarPreg();
+    changeScreen(INICIO_RESPUESTA);
 
     return;
   }
@@ -429,8 +461,9 @@ void Game_Estructuras::onConfirmar()
 
     simpleAgregarOpcion();
 
-    changeScreen(RESUMEN);
     onConfirmarItem();
+    changeScreen(RESUMEN);
+
     return;
   }
   if(current_screen==RESUMEN) //Pantalla resumen juego
@@ -473,7 +506,7 @@ void Game_Estructuras::onAtras()
   {
     onCancelarItem();
     m_Controls.pbConfirmar->setEnabled(true);
-    changeScreen(INICIO_RESPUESTA);
+    changeScreen(ESCRIBIR_PREG);
     return;
   }
 
@@ -511,71 +544,171 @@ void Game_Estructuras::onCancelarItem()
 
 void Game_Estructuras::onEliminarItem()
 {
-  int item = int(m_Controls.cbItem->currentIndex())+1;
-  string name="Pregunta" + std::to_string(item);
-  if(GetDataStorage()->GetNamedNode(name))
+  int item = int(m_Controls.cbOpcion->currentIndex())+1;
+  QMessageBox msgBox;
+  int ret;
+  bool completeItem = false;
+  if (m_Controls.cbOpcion->itemText(item-1).toStdString().find("Pregunta") != string::npos)
   {
-    GetDataStorage()->Remove(GetDataStorage()->GetNamedNode(name));
+      std::string message = "Seleccionó eliminar la pregunta " + std::to_string(item) +".\n Esto eliminará todo el item correspondiente, incluyendo las respuestas.";
+      msgBox.setText(message.c_str());
+      msgBox.setInformativeText("¿Desea confirmarlo?");
+      msgBox.setStandardButtons(QMessageBox::Cancel|QMessageBox::Yes);
+      ret = msgBox.exec();
+      completeItem = true;
   }
-  for (unsigned long i = 0 ; i<N_options[item-1]; i++)
+  else if (m_Controls.cbOpcion->itemText(item-1).toStdString().find("Respuesta") != string::npos)
   {
-    name = "Respuesta" + std::to_string(item) +"-Opcion" + std::to_string(i+1);
-    if(GetDataStorage()->GetNamedNode(name))
-    {
-      GetDataStorage()->Remove(GetDataStorage()->GetNamedNode(name));
-    }
+      std::string message = "Seleccionó eliminar la opción " + std::to_string(item) + ".\n La pregunta seguirá existiendo, sólo se eliminará esta opción de respuesta";
+      msgBox.setText(message.c_str());
+      msgBox.setInformativeText("¿Desea confirmarlo?");
+      msgBox.setStandardButtons(QMessageBox::Cancel|QMessageBox::Yes);
+      ret = msgBox.exec();
   }
 
-  for (int i=item+1; i<=int(N_items); i++)
-  {
-    string name="Pregunta" + std::to_string(i);
-    if(GetDataStorage()->GetNamedNode(name))
-    {
-      string new_name="Pregunta" + std::to_string(i-1);
-      GetDataStorage()->GetNamedNode(name)->SetName(new_name);
-    }
-    for (unsigned long j = 0 ; j<N_options[i-1]; j++)
-    {
-      name = "Respuesta" + std::to_string(i) +"-Opcion" + std::to_string(j+1);
-      if(GetDataStorage()->GetNamedNode(name))
-      {
-        string new_name="Respuesta" + std::to_string(i-1) +"-Opcion" + std::to_string(j+1);
 
-        GetDataStorage()->GetNamedNode(name)->SetName(new_name);
+  switch (ret)
+  {
+    case QMessageBox::Cancel:
+        // Save was clicked
+        return;
+    case QMessageBox::Yes:
+        // Don't Save was clicked
+      if (completeItem)
+       {
+          string name=m_Controls.cbOpcion->itemText(item-1).toStdString(); //"Pregunta"
+          if(GetDataStorage()->GetNamedNode(name))
+          {
+            GetDataStorage()->Remove(GetDataStorage()->GetNamedNode(name));
+          }
+          m_Controls.cbOpcion->removeItem(m_Controls.cbOpcion->findText(name.c_str()));
+          std::string itemErasedStr = name.substr(name.find("Pregunta")+9,name.length());
+          int itemErased = std::atoi(itemErasedStr.c_str());
+          for (unsigned long i = 0 ; i<N_options[itemErased-1]; i++)
+          {
+            name = "Respuesta" + itemErasedStr +"-Opcion" + std::to_string(i+1);
+            if(GetDataStorage()->GetNamedNode(name))
+            {
+              GetDataStorage()->Remove(GetDataStorage()->GetNamedNode(name));
+            }
+            m_Controls.cbOpcion->removeItem(m_Controls.cbOpcion->findText(name.c_str()));
+
+          }
+          cout<<"A borrar el item "<<itemErasedStr<<endl;
+          for (int i=itemErased+1; i<=int(N_items); i++) //Actualizo los numeros de los items posteriores
+          {
+            string name="Pregunta" + std::to_string(i);
+            std::string new_name = "Pregunta " + std::to_string(i-1);
+            cout<<"old name"<<name<<"new name"<<new_name<<endl;
+
+            m_Controls.cbOpcion->setItemText(m_Controls.cbOpcion->findText(name.c_str()),new_name.c_str());
+            if(GetDataStorage()->GetNamedNode(name))
+            {
+
+              GetDataStorage()->GetNamedNode(name)->SetName(new_name);
+            }
+
+            for (unsigned long j = 0 ; j<N_options[i-1]; j++)
+            {
+              name = "Respuesta" + std::to_string(i) +"-Opcion" + std::to_string(j+1);
+              string new_name="Respuesta" + std::to_string(i-1) +"-Opcion" + std::to_string(j+1);
+              cout<<"old name"<<name<<"new name"<<new_name<<endl;
+
+              if(GetDataStorage()->GetNamedNode(name))
+              {
+
+                GetDataStorage()->GetNamedNode(name)->SetName(new_name);
+
+
+              }
+              m_Controls.cbOpcion->setItemText(m_Controls.cbOpcion->findText(name.c_str()),new_name.c_str());
+
+            }
+            m_Controls.cbItem->setItemText(i-1,new_name.c_str());
+
+          }
+          N_options.erase(N_options.begin()+item-1);
+          items_summaries.erase(items_summaries.begin()+item-1);
+          if (N_items!=0)
+          {
+             N_items--;
+          }
+
+          m_Controls.cbItem->removeItem(item-1);
+        }
+        else
+        {
+          string name=m_Controls.cbOpcion->itemText(item-1).toStdString(); //Respuesta1-Opcion2
+          std::string itemErasedStr = name.substr(name.find("Respuesta")+9,name.find("-"));
+          std::string optionErasedStr = name.substr(name.find("Opcion")+6,name.length());
+          int itemErased = std::atoi(itemErasedStr.c_str());
+          int optionErased = std::atoi(optionErasedStr.c_str());
+
+          if(GetDataStorage()->GetNamedNode(name))
+          {
+            GetDataStorage()->Remove(GetDataStorage()->GetNamedNode(name));
+          }
+          for (unsigned long j = optionErased ; j<N_options[itemErased-1]; j++)
+          {
+            name = "Respuesta" + std::to_string(itemErased) +"-Opcion" + std::to_string(j+1);
+            string new_name="Respuesta" + std::to_string(itemErased) +"-Opcion" + std::to_string(j);
+
+            if(GetDataStorage()->GetNamedNode(name))
+            {
+
+              GetDataStorage()->GetNamedNode(name)->SetName(new_name);
+
+
+            }
+            m_Controls.cbOpcion->setItemText(m_Controls.cbOpcion->findText(name.c_str()),new_name.c_str());
+            if (N_options[itemErased-1]!=0)
+            {
+                N_options[itemErased-1]--;
+            }
+            string oldSummary = items_summaries[itemErased-1];
+            int startErase = oldSummary.find("Opcion"+optionErasedStr);
+            int endErase;
+            if (oldSummary.find("Opcion"+std::to_string(optionErased+1))!=-1)
+            {
+                endErase = oldSummary.find("Opcion"+std::to_string(optionErased+1));
+            }
+            else
+            {
+                endErase = oldSummary.length();
+            }
+
+            string newSummary = oldSummary.substr(0,startErase) + oldSummary.substr(endErase+1,oldSummary.length());
+          }
+
+
+        }
 
       }
-    }
-    std::string nameItem = "Pregunta " + std::to_string(i-1);
-    m_Controls.cbItem->setItemText(i-1,nameItem.c_str());
-  }
-
-  items_summaries.erase(items_summaries.begin()+item-1);
-  N_options.erase(N_options.begin()+item-1);
-  /*
-  for (int i=item-1; i<int(N_items); i++)
-  {
-    m_Controls.cbItem->addItem(std::to_string(i).c_str());
-  }
-  for (int i = 0; i<(int(N_items)-item);i++)
-  {
-
-    m_Controls.cbItem->addItem(std::to_string(item+i).c_str());
-  }
-  */
-  if (N_items!=0)
-  {
-     N_items--;
-  }
-
-  m_Controls.cbItem->removeItem(item-1);
 
 }
 
-void Game_Estructuras::onMostrarItem(int item)
+
+void Game_Estructuras::onResumen()
+{
+    int item = m_Controls.cbItem->currentIndex();
+    QString currentitems(items_summaries[item].c_str());
+    m_Controls.textResumen->setText(currentitems);
+    cout<<"on resumen"<<currentitems<<endl;
+}
+
+
+void Game_Estructuras::onMostrar()
+{
+    cout<<"On mostrar"<<endl;
+    cout<<m_Controls.cbItem->currentIndex()<<endl;
+    mostrarItem(m_Controls.cbItem->currentIndex());
+}
+void Game_Estructuras::mostrarItem(int item)
 {
 
     item++;
     string name="Pregunta" + std::to_string(item);
+    cout<<name<<endl;
     mitk::DataNode *nodopreg = GetDataStorage()->GetNamedNode(name);
     if(nodopreg)
     {
@@ -590,25 +723,46 @@ void Game_Estructuras::onMostrarItem(int item)
       }
       int nodos;
       nodopreg->GetIntProperty("medicas.gaming.NumberOfNodes",nodos);
+      cout<<nodos<<endl;
       if (nodos>0)
       {
         for(int i =0; i<nodos; i++)
         {
-          string prop_name = "medicas.gaming.nodo" + std::to_string(i);
-          string n;
-          nodopreg->GetStringProperty(prop_name.c_str(),n);
-          if(GetDataStorage()->GetNamedNode(n))
+
+          std::string prop_name = "medicas.gaming.nodo" + std::to_string(i);
+          std::string prop_name_color_R = "medicas.gaming.color_nodo_R" + std::to_string(i);
+          std::string prop_name_color_G = "medicas.gaming.color_nodo_G" + std::to_string(i);
+          std::string prop_name_color_B = "medicas.gaming.color_nodo_B" + std::to_string(i);
+          std::string prop_opacity = "medicas.gaming.opacity" + std::to_string(i);
+          std::string node_name;
+          nodopreg->GetStringProperty(prop_name.c_str(),node_name);
+          cout<<node_name<<endl;
+          float col[3];
+          nodopreg->GetFloatProperty(prop_name_color_R.c_str(),col[0]);
+          nodopreg->GetFloatProperty(prop_name_color_G.c_str(),col[1]);
+          nodopreg->GetFloatProperty(prop_name_color_B.c_str(),col[2]);
+          float opac;
+          nodopreg->GetFloatProperty(prop_opacity.c_str(),opac);
+          mitk::Color colmitk;
+          colmitk.SetRed(col[0]);
+          colmitk.SetGreen(col[1]);
+          colmitk.SetBlue(col[2]);
+
+
+          if(GetDataStorage()->GetNamedNode(node_name))
           {
-            GetDataStorage()->GetNamedNode(n)->SetVisibility(true);
+            GetDataStorage()->GetNamedNode(node_name)->SetVisibility(true);
+            GetDataStorage()->GetNamedNode(node_name)->SetFloatProperty("opacity",opac);
+            GetDataStorage()->GetNamedNode(node_name)->SetColor(colmitk);
+
+
           }
           mitk::RenderingManager::GetInstance()->RequestUpdateAll();
         }
 
       }
     }
-    QString currentitems(items_summaries[item-1].c_str());
-    m_Controls.textResumen->setText(currentitems);
-    cout<<currentitems<<endl;
+
 }
 void Game_Estructuras::onCancelarJuego()
 {
@@ -621,6 +775,13 @@ void Game_Estructuras::onSimpleConfirmarPreg()
     mitk::DataNode::Pointer nuevapregunta = GetDataStorage()->GetNamedNode(name);
     std::string text;
     string question_summary="";
+    QString str = m_Controls.lePreg->toPlainText();
+    if(str.isEmpty())
+    {
+      QMessageBox::warning(NULL, "Pregunta inválida", "Por favor escriba un texto.");
+      changeScreen(ESCRIBIR_PREG);
+      return;
+    }
     if (!nuevapregunta)
     {
         nuevapregunta = mitk::DataNode::New();
@@ -654,20 +815,14 @@ void Game_Estructuras::onSimpleConfirmarPreg()
         GetDataStorage()->Add(nuevapregunta);
 
     }
-    QString str = m_Controls.lePreg->toPlainText();
-    if(str.isEmpty())
-    {
-      QMessageBox::warning(NULL, "Pregunta inválida", "Por favor escriba un texto.");
-      return;
-    }
+
 
     text = str.toStdString();
-    question_summary = question_summary + "Texto: '" + text +"'";
+    question_summary = question_summary + " '" + text +"'";
 
     nuevapregunta->SetStringProperty("medicas.gaming.text",text.c_str());
     nuevapregunta->SetIntProperty("medicas.gaming.itemNumber", int(N_items));
     nuevapregunta->SetName(name);
-
     if (!m_Controls.cbEscenario->isChecked())
     {
         nuevapregunta->SetIntProperty("medicas.gaming.NumberOfNodes",0);
@@ -721,11 +876,13 @@ void Game_Estructuras::onSimpleConfirmarPreg()
               string prop_name_color_R = "medicas.gaming.color_nodo_R" + std::to_string(i);
               string prop_name_color_G = "medicas.gaming.color_nodo_G" + std::to_string(i);
               string prop_name_color_B = "medicas.gaming.color_nodo_B" + std::to_string(i);
-
+              string prop_opacity = "medicas.gaming.opacity" + std::to_string(i);
+              mitk::FloatProperty *opacityProperty = dynamic_cast<mitk::FloatProperty*>(GetDataStorage()->GetNamedNode(list_of_node_names[i])->GetProperty("opacity"));
               float col[3];
               col[0] = list_of_node_colors[i].GetRed();
               col[1] =list_of_node_colors[i].GetGreen();
-              col[2] =list_of_node_colors[i].GetBlue();
+              col[2] =list_of_node_colors[i].GetBlue();              
+              nuevapregunta->SetFloatProperty(prop_opacity.c_str(),opacityProperty->GetValue());
               nuevapregunta->SetStringProperty(prop_name.c_str(),list_of_node_names[i].c_str());
               nuevapregunta->SetFloatProperty(prop_name_color_R.c_str(),col[0]);
               nuevapregunta->SetFloatProperty(prop_name_color_G.c_str(),col[1]);
@@ -792,7 +949,7 @@ void Game_Estructuras::onConfirmarPreg(int mode)
             }
 
             std::string text = str.toStdString();
-            question_summary = question_summary + "Texto: '" + text +"'";
+            question_summary = question_summary + " '" + text +"'";
             nuevapregunta->SetStringProperty("text",text.c_str());
             nuevapregunta->SetIntProperty("itemNumber", int(N_items));
             nuevapregunta->SetName(name);
@@ -816,7 +973,7 @@ void Game_Estructuras::onConfirmarPreg(int mode)
         }
 
         std::string text = str.toStdString();
-        question_summary = question_summary + "Texto: '" + text +"'";
+        question_summary = question_summary + " '" + text +"'";
         nuevapregunta->SetStringProperty("text",text.c_str());
         nuevapregunta->Modified();
 
@@ -912,6 +1069,21 @@ void Game_Estructuras::onAgregarItem()
 
 }
 
+void Game_Estructuras::deleteCorrectAnswer()
+{
+    string name;
+    for (unsigned long j = 0 ; j<N_options[N_items-1]; j++)
+    {
+      name = "Respuesta" + std::to_string(N_items) +"-Opcion" + std::to_string(j+1);
+      if(GetDataStorage()->GetNamedNode(name))
+      {
+        GetDataStorage()->GetNamedNode(name)->SetBoolProperty("medicas.gaming.isCorrect",false);
+      }
+
+    }
+}
+
+
 void Game_Estructuras::simpleAgregarOpcion()
 {
     string name = "Respuesta" + std::to_string(N_items) +"-Opcion" + std::to_string(N_options[N_items-1]+1);
@@ -962,7 +1134,7 @@ void Game_Estructuras::simpleAgregarOpcion()
     }
     else
     {
-      option_summary = option_summary + "Texto: '" + text +"'";
+      option_summary = option_summary + " '" + text +"'";
 
     }
 
@@ -1012,11 +1184,15 @@ void Game_Estructuras::simpleAgregarOpcion()
             string prop_name_color_R = "medicas.gaming.color_nodo_R" + std::to_string(i);
             string prop_name_color_G = "medicas.gaming.color_nodo_G" + std::to_string(i);
             string prop_name_color_B = "medicas.gaming.color_nodo_B" + std::to_string(i);
+            string prop_opacity = "medicas.gaming.opacity" + std::to_string(i);
+            mitk::FloatProperty *opacityProperty = dynamic_cast<mitk::FloatProperty*>(GetDataStorage()->GetNamedNode(list_of_node_names[i])->GetProperty("opacity"));
 
             float col[3];
             col[0] = list_of_node_colors[i].GetRed();
             col[1] =list_of_node_colors[i].GetGreen();
             col[2] =list_of_node_colors[i].GetBlue();
+            nuevarespuesta->SetFloatProperty(prop_opacity.c_str(),opacityProperty->GetValue());
+
             nuevarespuesta->SetStringProperty(prop_name.c_str(),list_of_node_names[i].c_str());
             nuevarespuesta->SetFloatProperty(prop_name_color_R.c_str(),col[0]);
             nuevarespuesta->SetFloatProperty(prop_name_color_G.c_str(),col[1]);
@@ -1034,10 +1210,33 @@ void Game_Estructuras::simpleAgregarOpcion()
     std::string extra;
     if(m_Controls.rbSI->isChecked())
     {
-
+      if (m_flag_hay_correcta)
+      {
+          std::string message = "Ya existía una respuesta correcta.";
+          QMessageBox msgBox;
+          msgBox.setText(message.c_str());
+          msgBox.setInformativeText("¿Desea cambiarla por esta?");
+          msgBox.setStandardButtons(QMessageBox::No|QMessageBox::Yes);
+          int ret = msgBox.exec();
+          switch (ret)
+          {
+            case QMessageBox::No:
+              nuevarespuesta->SetBoolProperty("medicas.gaming.isCorrect",false);
+              break;
+            case QMessageBox::Yes:
+              deleteCorrectAnswer();
+              nuevarespuesta->SetBoolProperty("medicas.gaming.isCorrect",true);
+              extra = extra  +"CORRECTA";
+              break;
+            }
+      }
+      else
+      {
       m_flag_hay_correcta = true;
       nuevarespuesta->SetBoolProperty("medicas.gaming.isCorrect",true);
+
       extra = extra  +"CORRECTA";
+      }
 
     }
     else
@@ -1088,10 +1287,10 @@ void Game_Estructuras::agregarOpcion(int mode)
            gd->SetVtkPolyData(point);
            nuevarespuesta->SetData(gd);
            nuevarespuesta->SetVisibility(false);
-           nuevarespuesta->SetBoolProperty("isQuestion", false);
+           nuevarespuesta->SetBoolProperty("medicas.gaming.isQuestion", false);
 
-           nuevarespuesta->SetIntProperty("itemNumber", N_items);
-           nuevarespuesta->SetIntProperty("optionNumber",N_options[N_items-1]);
+           nuevarespuesta->SetIntProperty("medicas.gaming.itemNumber", N_items);
+           nuevarespuesta->SetIntProperty("medicas.gaming.optionNumber",N_options[N_items-1]);
 
            nuevarespuesta->SetName(name);
            GetDataStorage()->Add(nuevarespuesta);
@@ -1108,13 +1307,13 @@ void Game_Estructuras::agregarOpcion(int mode)
         }
         else
         {
-          option_summary = option_summary + "Texto: '" + text +"'";
+          option_summary = option_summary + " '" + text +"'";
         }
 
 
         m_option_summary = m_option_summary + '\n'+ option_summary;
 
-        nuevarespuesta->SetStringProperty("text",text.c_str());
+        nuevarespuesta->SetStringProperty("medicas.gaming.text",text.c_str());
 
         nuevarespuesta->Modified();
         mitk::RenderingManager::GetInstance()->RequestUpdateAll();
@@ -1131,7 +1330,7 @@ void Game_Estructuras::agregarOpcion(int mode)
         mitk::DataNode::Pointer nuevarespuesta = GetDataStorage()->GetNamedNode(name);
         if (m_Controls.cbGenerico->isChecked())
         {
-            nuevarespuesta->SetIntProperty("NumberOfNodes",0);
+            nuevarespuesta->SetIntProperty("medicas.gaming.NumberOfNodes",0);
             return;
         }
         else
@@ -1162,16 +1361,16 @@ void Game_Estructuras::agregarOpcion(int mode)
             if (!list_of_node_names.empty())
             {
 
-              nuevarespuesta->SetIntProperty("NumberOfNodes",list_of_node_names.size());
+              nuevarespuesta->SetIntProperty("medicas.gaming.NumberOfNodes",list_of_node_names.size());
               for(std::vector<int>::size_type i = 0; i != list_of_node_names.size(); i++)
               {
                 GetDataStorage()->GetNamedNode(list_of_node_names[i])->SetVisibility(false);
                 GetDataStorage()->GetNamedNode(list_of_node_names[i])->Modified();
                 m_option_summary=m_option_summary + '\n' + list_of_node_names[i];
-                string prop_name = "nodo" + std::to_string(i);
-                string prop_name_color_R = "color_nodo_R" + std::to_string(i);
-                string prop_name_color_G = "color_nodo_G" + std::to_string(i);
-                string prop_name_color_B = "color_nodo_B" + std::to_string(i);
+                string prop_name = "medicas.gaming.nodo" + std::to_string(i);
+                string prop_name_color_R = "medicas.gaming.color_nodo_R" + std::to_string(i);
+                string prop_name_color_G = "medicas.gaming.color_nodo_G" + std::to_string(i);
+                string prop_name_color_B = "medicas.gaming.color_nodo_B" + std::to_string(i);
 
                 float col[3];
                 col[0] = list_of_node_colors[i].GetRed();
@@ -1186,10 +1385,10 @@ void Game_Estructuras::agregarOpcion(int mode)
             }
             else
             {
-                nuevarespuesta->SetIntProperty("NumberOfNodes",0);
+                nuevarespuesta->SetIntProperty("medicas.gaming.NumberOfNodes",0);
             }
 
-            nuevarespuesta->SetIntProperty("view",m_Controls.cbVistasPreg->currentIndex());
+            nuevarespuesta->SetIntProperty("medicas.gaming.view",m_Controls.cbVistasPreg->currentIndex());
 
             return;
         }
@@ -1203,13 +1402,13 @@ void Game_Estructuras::agregarOpcion(int mode)
         {
 
           m_flag_hay_correcta = true;
-          nuevarespuesta->SetBoolProperty("isCorrect",true);
+          nuevarespuesta->SetBoolProperty("medicas.gaming.isCorrect",true);
           extra = extra  +"CORRECTA";
 
         }
         else
         {
-          nuevarespuesta->SetBoolProperty("isCorrect",false);
+          nuevarespuesta->SetBoolProperty("medicas.gaming.isCorrect",false);
         }
         m_option_summary = m_option_summary+ '\t' + '\t' +extra + '\n';
         N_options[N_items-1]=N_options[N_items-1]+1;
@@ -1277,7 +1476,13 @@ void Game_Estructuras::onConfirmarItem()
   }
 
   m_Controls.lePreg->setText("");
-
+  std::string line = "Pregunta " + std::to_string(N_items);
+  m_Controls.cbOpcion->addItem(line.c_str());
+  for (unsigned long i = 0 ; i<N_options[N_items-1]; i++)
+  {
+    name = "Respuesta" + std::to_string(N_items) +"-Opcion" + std::to_string(i+1);
+    m_Controls.cbOpcion->addItem(name.c_str());
+  }
 
   //AGREGAR UPDATE DE ITEMS_SUMMARY
   string item_summary = "PREGUNTA";

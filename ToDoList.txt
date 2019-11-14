@@ -1,0 +1,18 @@
+Desarrollo:
+-Funcionalidad boton Mostrar Item
+-Helper objects a los nodos pregunta
+-Agregar musica
+
+Testing:
+A.Eliminar items 
+B.Eliminar preguntas enteras
+C.Jugar
+D.Agregar otra pregunta
+E.Que no haya opcion correcta
+F.distintas opacidades un mismo objeto en distrintos items
+G.distintos colores "
+H.pongo otra opcion cuando en realidad era la ultima
+A+B
+A+D
+A+B+C
+
