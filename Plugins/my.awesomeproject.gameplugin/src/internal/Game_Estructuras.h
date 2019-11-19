@@ -82,7 +82,7 @@ private slots:
   void onCrearJuego();
   void onAgregarItem();
   void onConfirmarPreg(int mode);
-  void onSimpleConfirmarPreg();
+  int onSimpleConfirmarPreg();
   void onAgregarOpcion();
   void onEliminarItem();
   void onCancelarJuego();

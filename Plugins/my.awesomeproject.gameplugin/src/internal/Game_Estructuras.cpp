@@ -115,7 +115,8 @@ void Game_Estructuras::changeScreen(int scr)
     m_Controls.cbGenerico->setVisible(false);
     m_Controls.cbEscenario->setVisible(false);
     m_Controls.cbVistasPreg->setVisible(false);
-    m_Controls.aclaracion->setVisible(false);
+    //m_Controls.aclaracion->setVisible(false);
+    m_Controls.aclaracion->setText("             ");
     m_Controls.labelItems->setVisible(false);
     m_Controls.labelResumen->setVisible(false);
 
@@ -162,6 +163,7 @@ void Game_Estructuras::changeScreen(int scr)
     m_Controls.lePreg->setVisible(true);
     m_Controls.lePreg->setEnabled(true);
     m_Controls.lePreg->setText("");
+    m_Controls.aclaracion->setText("                ");
 
     m_Controls.cbGenerico->setVisible(false);
     m_Controls.cbGenerico->setChecked(false);
@@ -212,6 +214,7 @@ void Game_Estructuras::changeScreen(int scr)
     m_Controls.indicacion->setText("A continuación, vamos a crear una por una las opciones \nmultiple-choice para esta pregunta.");
     m_Controls.lePreg->setVisible(false);
     m_Controls.leScore->setVisible(false);
+    m_Controls.aclaracion->setText("                ");
 
     m_Controls.cbOpcion->setVisible(false);
     m_Controls.cbItem->setVisible(false);
@@ -229,6 +232,7 @@ void Game_Estructuras::changeScreen(int scr)
 
     std::string tit = "Respuesta "+ std::to_string(N_items) + "\nOpción " +  std::to_string(N_options[N_items-1]+1);
     m_Controls.labelTitulo->setText(tit.c_str());
+    m_Controls.aclaracion->setText("                ");
 
     m_Controls.pbCrear->setVisible(false);
     m_Controls.pbCargarJuego->setVisible(false);
@@ -275,6 +279,7 @@ void Game_Estructuras::changeScreen(int scr)
 
   if(scr==RESUMEN)
   {
+
     std::string tit = "RESUMEN DE JUEGO";
     m_Controls.labelTitulo->setText(tit.c_str());
     m_Controls.cbEscenario->setChecked(false);
@@ -300,7 +305,11 @@ void Game_Estructuras::changeScreen(int scr)
     m_Controls.cbGenerico->setVisible(false);
     m_Controls.labelItems->setVisible(true);
     m_Controls.labelResumen->setVisible(true);
-    m_Controls.aclaracion->setVisible(false);
+   // m_Controls.aclaracion->setVisible(false);
+    m_Controls.aclaracion->setText("             ");
+
+    m_Controls.rbSI->setVisible(false);
+    m_Controls.rbNO->setVisible(false);
     onResumen();
   }
 }
@@ -355,12 +364,15 @@ void Game_Estructuras::onToggle()
         QFont aclaracion;
         aclaracion.setItalic(true);
         m_Controls.aclaracion->setFont(aclaracion);
-        m_Controls.aclaracion->setVisible(true);
+        m_Controls.aclaracion->setText("Marque como visibles aquellos objetos que desea incluir en el escenario ");
+        //m_Controls.aclaracion->setVisible(true);
         m_Controls.cbVistasPreg->setEnabled(true);
     }
     else
     {
-        m_Controls.aclaracion->setVisible(false);
+        //m_Controls.aclaracion->setVisible(false);
+        m_Controls.aclaracion->setText("                ");
+
         m_Controls.cbVistasPreg->setEnabled(false);
 
     }
@@ -445,8 +457,9 @@ void Game_Estructuras::onConfirmar()
   if (current_screen==ESCRIBIR_PREG) //Pantalla de nueva pregunta
   {
 
-    onSimpleConfirmarPreg();
-    changeScreen(INICIO_RESPUESTA);
+    int state = onSimpleConfirmarPreg();
+    if (state==0)
+        changeScreen(INICIO_RESPUESTA);
 
     return;
   }
@@ -559,7 +572,7 @@ void Game_Estructuras::onEliminarItem()
   }
   else if (m_Controls.cbOpcion->itemText(item-1).toStdString().find("Respuesta") != string::npos)
   {
-      std::string message = "Seleccionó eliminar la opción " + std::to_string(item) + ".\n La pregunta seguirá existiendo, sólo se eliminará esta opción de respuesta";
+      std::string message = "Seleccionó eliminar la opción " + std::to_string(item-1) + ".\n La pregunta seguirá existiendo, sólo se eliminará esta opción de respuesta";
       msgBox.setText(message.c_str());
       msgBox.setInformativeText("¿Desea confirmarlo?");
       msgBox.setStandardButtons(QMessageBox::Cancel|QMessageBox::Yes);
@@ -636,11 +649,13 @@ void Game_Estructuras::onEliminarItem()
 
           m_Controls.cbItem->removeItem(item-1);
         }
-        else
+      else
         {
           string name=m_Controls.cbOpcion->itemText(item-1).toStdString(); //Respuesta1-Opcion2
-          std::string itemErasedStr = name.substr(name.find("Respuesta")+9,name.find("-"));
+          cout<<"a eliminar: "<<name<<endl;
+          std::string itemErasedStr = name.substr(name.find("Respuesta")+9,1);
           std::string optionErasedStr = name.substr(name.find("Opcion")+6,name.length());
+          cout<<itemErasedStr<<" "<<optionErasedStr<<endl;
           int itemErased = std::atoi(itemErasedStr.c_str());
           int optionErased = std::atoi(optionErasedStr.c_str());
 
@@ -769,7 +784,7 @@ void Game_Estructuras::onCancelarJuego()
 
 }
 
-void Game_Estructuras::onSimpleConfirmarPreg()
+int Game_Estructuras::onSimpleConfirmarPreg()
 {
     string name = "Pregunta" + std::to_string(N_items);
     mitk::DataNode::Pointer nuevapregunta = GetDataStorage()->GetNamedNode(name);
@@ -780,7 +795,7 @@ void Game_Estructuras::onSimpleConfirmarPreg()
     {
       QMessageBox::warning(NULL, "Pregunta inválida", "Por favor escriba un texto.");
       changeScreen(ESCRIBIR_PREG);
-      return;
+      return 1;
     }
     if (!nuevapregunta)
     {
@@ -901,7 +916,7 @@ void Game_Estructuras::onSimpleConfirmarPreg()
 
     mitk::RenderingManager::GetInstance()->RequestUpdateAll();
 
-
+    return 0;
 }
 
 void Game_Estructuras::onConfirmarPreg(int mode)
@@ -1443,7 +1458,46 @@ void Game_Estructuras::onConfirmarItem()
   //EL ITEM NO ES VALIDO:
   if (!m_flag_hay_correcta)
   {
-    QMessageBox::warning(NULL,"Item inválido.", "No ha marcado ninguna respuesta correcta. Ingrese todas las respuestas nuevamente.");
+
+    QMessageBox msgBox;
+    std::string message = "No ha marcado ninguna respuesta correcta.";
+    msgBox.setText(message.c_str());
+    msgBox.setInformativeText("Seleccione la correcta");
+    mitk::DataNode *nodoopcion;
+    std::string name;
+    std::string buttonName;
+    /*std::vector<QMessageBox::ButtonRole> roles;
+    roles[0] = QMessageBox::YesRole;
+    roles[1]= QMessageBox::NoRole;
+    roles[2] = QMessageBox::AcceptRole;
+    roles[3] = QMessageBox::RejectRole;
+    roles[4] = QMessageBox::ResetRole;*/
+    std::vector<QAbstractButton*> buttons;
+
+    for (unsigned long i =0;i<N_options[N_items-1]; i++)
+    {
+      name = "Respuesta" + std::to_string(N_items) +"-Opcion" + std::to_string(i+1);
+      nodoopcion = GetDataStorage()->GetNamedNode(name);
+      if(nodoopcion)
+      {
+        nodoopcion->GetStringProperty("medicas.gaming.text",buttonName);
+        //buttonName = "Opcion" + std::to_string(i+1) + ": "+ buttonName;
+      }
+      QAbstractButton* button = msgBox.addButton(QString(buttonName.c_str()), QMessageBox::YesRole);
+      buttons.push_back(button);
+    }
+
+    //msgBox.setStandardButtons(QMessageBox::Cancel|QMessageBox::Yes);
+    msgBox.exec();
+    QAbstractButton* selectedbutton = msgBox.clickedButton();
+    ptrdiff_t index = buttons[0]- selectedbutton;
+    std::string correctName = "Respuesta" + std::to_string(N_items) +"-Opcion" + std::to_string(index+1);
+    nodoopcion = GetDataStorage()->GetNamedNode(correctName);
+    nodoopcion->SetBoolProperty("medicas.gaming.isCorrect",true);
+    m_flag_hay_correcta = true;
+    std::size_t found = m_option_summary.find(selectedbutton->text().toStdString());
+    m_option_summary = m_option_summary.insert(found+selectedbutton->text().size()+1,"\tCORRECTA ");
+    /*
     string name="Pregunta" + std::to_string(N_items);
     if(GetDataStorage()->GetNamedNode(name))
     {
@@ -1463,7 +1517,7 @@ void Game_Estructuras::onConfirmarItem()
       N_items--;
     }
     changeScreen(ESCRIBIR_OPC);
-    return;
+    return;*/
   }
 
   //EL ITEM SÍ ES VÁLIDO:
