@@ -5,6 +5,11 @@ Desarrollo:
 - que no te deje no elegir SI/NO de opcion correcta
 - que al eliminar la respuesta correcta te deje seleccionar otra
 -poner el msgbox de seleccion de correcta como funcion separada
+-que toggle de cbOpcion verifique si tiene nodos el item para enable/disable el boton Mostrar escenario virtual
+
+Issues:
+-despues de eliminar, el summary no updatea bien.
+
 
 Testing:
 A.Eliminar items 

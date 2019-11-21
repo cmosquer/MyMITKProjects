@@ -81,7 +81,6 @@ private slots:
   //void createInteractor();
   void onCrearJuego();
   void onAgregarItem();
-  void onConfirmarPreg(int mode);
   int onSimpleConfirmarPreg();
   void onAgregarOpcion();
   void onEliminarItem();
@@ -107,8 +106,13 @@ private:
   void agregarOpcion(int mode);
   void changeScreen(int);
   void prepararResumen();
-  void mostrarItem(int i);
+  void mostrarItem(int pregunta,int item);
   void deleteCorrectAnswer();
+  void updateItemList();
+  void deleteItem(int pregunta);
+  void deleteOption(int pregunta,int item);
+  void updateSummaryBasedOnDataStorage();
+
   // This method is conveniently called whenever the selection of Data Manager
   // items changes.
 //  void OnSelectionChanged(
@@ -126,8 +130,6 @@ private:
   bool m_flag_hay_correcta;
   bool m_standard_options_flag;
   int current_screen;
-  std::string m_option_summary;
-  std::string m_question_summary;
   std::vector <std::string> items_summaries;
   std::vector <std::string> standard_options_names;
   QLineEdit *nodesView;
