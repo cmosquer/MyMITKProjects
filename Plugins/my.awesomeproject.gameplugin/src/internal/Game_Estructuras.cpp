@@ -267,10 +267,13 @@ void Game_Estructuras::changeScreen(int scr)
     m_Controls.labelScore->setText("¿Esta es la opción correcta?");
     m_Controls.leScore->setVisible(false);
     m_Controls.rbNO->setVisible(true);
+    m_Controls.rbNO->setAutoExclusive(false);
     m_Controls.rbNO->setChecked(false);
+    m_Controls.rbNO->setAutoExclusive(true);
     m_Controls.rbSI->setVisible(true);
+    m_Controls.rbSI->setAutoExclusive(false);
     m_Controls.rbSI->setChecked(false);
-
+    m_Controls.rbSI->setAutoExclusive(true);
     m_Controls.cbOpcion->setVisible(false);
     m_Controls.cbItem->setVisible(false);
     m_Controls.textResumen->setVisible(false);
@@ -470,13 +473,15 @@ void Game_Estructuras::onConfirmar()
   }
   if(current_screen==ESCRIBIR_OPC) //Pantalla de nueva opción
   {
-
-    simpleAgregarOpcion();
-
-    onConfirmarItem();
-    changeScreen(RESUMEN);
-
+    int status = simpleAgregarOpcion();
+    if (status==0)
+    {
+        onConfirmarItem();
+        changeScreen(RESUMEN);
+    }
     return;
+
+
   }
   if(current_screen==RESUMEN) //Pantalla resumen juego
   {
@@ -533,6 +538,7 @@ void Game_Estructuras::onAtras()
 
 void Game_Estructuras::deleteItem(int item)
 {
+    cout<<"item "<<item<<endl;
     std::string name = "Pregunta"+std::to_string(item+1);
     if(GetDataStorage()->GetNamedNode(name))
     {
@@ -541,9 +547,9 @@ void Game_Estructuras::deleteItem(int item)
     //m_Controls.cbOpcion->removeItem(m_Controls.cbOpcion->findText(name.c_str()));
     //std::string itemErasedStr = name.substr(name.find("Pregunta")+9,name.length());
     //int itemErased = std::atoi(itemErasedStr.c_str());
-    for (unsigned long i = 0 ; i<N_options[item]; i++)
+    for (unsigned long k = 0 ; k<N_options[item]; k++)
     {
-      name = "Respuesta" + std::to_string(item+1) +"-Opcion" + std::to_string(i+1);
+      name = "Respuesta" + std::to_string(item+1) +"-Opcion" + std::to_string(k+1);
       if(GetDataStorage()->GetNamedNode(name))
       {
         GetDataStorage()->Remove(GetDataStorage()->GetNamedNode(name));
@@ -554,7 +560,7 @@ void Game_Estructuras::deleteItem(int item)
     for (int i=item+2; i<=int(N_items); i++) //Actualizo los numeros de los items posteriores
     {
       string name="Pregunta" + std::to_string(i);
-      std::string new_name = "Pregunta " + std::to_string(i-1);
+      std::string new_name = "Pregunta" + std::to_string(i-1);
       cout<<"old name: "<<name<<". new name: "<<new_name<<endl;
 
       //m_Controls.cbOpcion->setItemText(m_Controls.cbOpcion->findText(name.c_str()),new_name.c_str());
@@ -579,6 +585,7 @@ void Game_Estructuras::deleteItem(int item)
       m_Controls.cbItem->setItemText(i-1,new_name.c_str());
 
     }
+    cout<<"Pasando a borrar opciones"<<endl;
     N_options.erase(N_options.begin()+item);
     //items_summaries.erase(items_summaries.begin()+item);
     if (N_items!=0)
@@ -748,13 +755,10 @@ void Game_Estructuras::updateItemList()
 }
 void Game_Estructuras::onResumen()
 {
-    cout<<"pre update"<<endl;
     updateSummaryBasedOnDataStorage();
-    cout<<"postupdate"<<endl;
     int item = m_Controls.cbItem->currentIndex();
     QString currentitems(items_summaries[item].c_str());
     m_Controls.textResumen->setText(currentitems);
-    cout<<"preupdatelist"<<endl;
     updateItemList();
 
 }
@@ -769,7 +773,7 @@ void Game_Estructuras::mostrarItem(int numeroPregunta, int numeroItem)
 
     std::string itemCompleteName;
     //Chequear si esta queriendo mostrar toda una pregunta o una opcion
-    if (m_Controls.cbOpcion->itemText(numeroItem).toStdString().find("Pregunta") != string::npos)
+    if (m_Controls.cbOpcion->currentIndex()==0)
     {
         itemCompleteName = "Pregunta" + std::to_string(numeroPregunta+1);
     }
@@ -785,9 +789,11 @@ void Game_Estructuras::mostrarItem(int numeroPregunta, int numeroItem)
       mitk::DataStorage::SetOfObjects::ConstPointer allNodes = GetDataStorage()->GetAll();
       for (mitk::DataStorage::SetOfObjects::ConstIterator it = allNodes->Begin(); it != allNodes->End(); ++it)
       {
+        cout<<"it: "<<it.Value()<<endl;
+        cout<<"it: "<<it->Value()->GetName()<<endl;
         if(it->Value().IsNotNull())
         {
-          it->Value()->SetVisibility(false);
+          GetDataStorage()->GetNamedNode(it->Value()->GetName())->SetVisibility(false);
 
         }
       }
@@ -827,11 +833,11 @@ void Game_Estructuras::mostrarItem(int numeroPregunta, int numeroItem)
 
 
           }
-          mitk::RenderingManager::GetInstance()->RequestUpdateAll();
         }
 
       }
     }
+    mitk::RenderingManager::GetInstance()->RequestUpdateAll();
 
 }
 void Game_Estructuras::onCancelarJuego()
@@ -996,7 +1002,7 @@ void Game_Estructuras::deleteCorrectAnswer()
 }
 
 
-void Game_Estructuras::simpleAgregarOpcion()
+int Game_Estructuras::simpleAgregarOpcion()
 {
     string name = "Respuesta" + std::to_string(N_items) +"-Opcion" + std::to_string(N_options[N_items-1]+1);
     std::string text;
@@ -1035,6 +1041,51 @@ void Game_Estructuras::simpleAgregarOpcion()
        nuevarespuesta->SetName(name);
        GetDataStorage()->Add(nuevarespuesta);
     }
+    if(m_Controls.rbSI->isChecked())
+     {
+       if (m_flag_hay_correcta)
+       {
+           std::string message = "Ya existía una respuesta correcta.";
+
+           QMessageBox msgBox;
+           msgBox.setText(message.c_str());
+           msgBox.setInformativeText("¿Desea cambiarla por esta?");
+           msgBox.setStandardButtons(QMessageBox::No|QMessageBox::Yes);
+           int ret = msgBox.exec();
+           switch (ret)
+           {
+             case QMessageBox::No:
+               nuevarespuesta->SetBoolProperty("medicas.gaming.isCorrect",false);
+               break;
+             case QMessageBox::Yes:
+               deleteCorrectAnswer();
+               nuevarespuesta->SetBoolProperty("medicas.gaming.isCorrect",true);
+               break;
+             }
+       }
+       else
+       {
+       m_flag_hay_correcta = true;
+       nuevarespuesta->SetBoolProperty("medicas.gaming.isCorrect",true);
+       }
+
+     }
+     else
+     {
+       if(m_Controls.rbNO->isChecked())
+       {
+         nuevarespuesta->SetBoolProperty("medicas.gaming.isCorrect",false);
+       }
+       else
+       {
+
+           QMessageBox::warning(NULL, "Indicar si es correcta", "Por favor seleccione si esta respuesta es correcta o no.");
+           changeScreen(ESCRIBIR_OPC);
+           return 1;
+       }
+    }
+
+
 
     QString str = m_Controls.lePreg->toPlainText();
     text = str.toStdString();
@@ -1109,38 +1160,7 @@ void Game_Estructuras::simpleAgregarOpcion()
 
         nuevarespuesta->SetIntProperty("medicas.gaming.view",m_Controls.cbVistasPreg->currentIndex());
     }
-    if(m_Controls.rbSI->isChecked())
-    {
-      if (m_flag_hay_correcta)
-      {
-          std::string message = "Ya existía una respuesta correcta.";
-          QMessageBox msgBox;
-          msgBox.setText(message.c_str());
-          msgBox.setInformativeText("¿Desea cambiarla por esta?");
-          msgBox.setStandardButtons(QMessageBox::No|QMessageBox::Yes);
-          int ret = msgBox.exec();
-          switch (ret)
-          {
-            case QMessageBox::No:
-              nuevarespuesta->SetBoolProperty("medicas.gaming.isCorrect",false);
-              break;
-            case QMessageBox::Yes:
-              deleteCorrectAnswer();
-              nuevarespuesta->SetBoolProperty("medicas.gaming.isCorrect",true);
-              break;
-            }
-      }
-      else
-      {
-      m_flag_hay_correcta = true;
-      nuevarespuesta->SetBoolProperty("medicas.gaming.isCorrect",true);
-      }
 
-    }
-    else
-    {
-      nuevarespuesta->SetBoolProperty("medicas.gaming.isCorrect",false);
-    }
     N_options[N_items-1]=N_options[N_items-1]+1;
     cout<<N_options[N_items-1]<<endl;
     if (N_options[N_items-1]==MAX_OPCS)
@@ -1149,178 +1169,19 @@ void Game_Estructuras::simpleAgregarOpcion()
     }
 
     mitk::RenderingManager::GetInstance()->RequestUpdateAll();
-
+    return 0;
 }
-void Game_Estructuras::agregarOpcion(int mode)
-{
-    if (mode==0)
-    {
-
-        string name = "Respuesta" + std::to_string(N_items) +"-Opcion" + std::to_string(N_options[N_items-1]+1);
-
-        mitk::DataNode::Pointer nuevarespuesta = GetDataStorage()->GetNamedNode(name);
-        if (!nuevarespuesta)
-        {
-           nuevarespuesta = mitk::DataNode::New();
-           mitk::Surface::Pointer gd = mitk::Surface::New();
-           vtkSmartPointer<vtkPoints> points =
-             vtkSmartPointer<vtkPoints>::New();
-           const float p[3] = {1.0, 2.0, 3.0};
-
-           // Create the topology of the point (a vertex)
-           vtkSmartPointer<vtkCellArray> vertices =
-             vtkSmartPointer<vtkCellArray>::New();
-           vtkIdType pid[1];
-           pid[0] = points->InsertNextPoint(p);
-           vertices->InsertNextCell(1,pid);
-
-           // Create a polydata object
-           vtkSmartPointer<vtkPolyData> point =
-             vtkSmartPointer<vtkPolyData>::New();
-
-           // Set the points and vertices we created as the geometry and topology of the polydata
-           point->SetPoints(points);
-           point->SetVerts(vertices);
-
-           gd->SetVtkPolyData(point);
-           nuevarespuesta->SetData(gd);
-           nuevarespuesta->SetVisibility(false);
-           nuevarespuesta->SetBoolProperty("medicas.gaming.isQuestion", false);
-
-           nuevarespuesta->SetIntProperty("medicas.gaming.itemNumber", N_items);
-           nuevarespuesta->SetIntProperty("medicas.gaming.optionNumber",N_options[N_items-1]);
-
-           nuevarespuesta->SetName(name);
-           GetDataStorage()->Add(nuevarespuesta);
 
 
-        }
-
-        QString str = m_Controls.lePreg->toPlainText();
-        std::string text = str.toStdString();
-        if (text.empty()|| m_standard_options_flag)
-        {
-          text = standard_options_names[N_options[N_items-1]];
-        }
-
-        nuevarespuesta->SetStringProperty("medicas.gaming.text",text.c_str());
-
-        nuevarespuesta->Modified();
-        mitk::RenderingManager::GetInstance()->RequestUpdateAll();
-
-
-        return;
-    }
-    if (mode==1)
-    {
-
-
-        string name = "Respuesta" + std::to_string(N_items) +"-Opcion" + std::to_string(N_options[N_items-1]+1);
-
-        mitk::DataNode::Pointer nuevarespuesta = GetDataStorage()->GetNamedNode(name);
-        if (m_Controls.cbGenerico->isChecked())
-        {
-            nuevarespuesta->SetIntProperty("medicas.gaming.NumberOfNodes",0);
-            return;
-        }
-        else
-        {
-            vector<std::string> list_of_node_names;
-            vector<mitk::Color> list_of_node_colors;
-
-            mitk::DataStorage::SetOfObjects::ConstPointer allNodes = GetDataStorage()->GetAll();
-            for (mitk::DataStorage::SetOfObjects::ConstIterator it = allNodes->Begin(); it != allNodes->End(); ++it)
-            {
-              mitk::DataNode *current_node = it->Value();
-              bool selected_flag=false;
-              current_node->GetBoolProperty("visible",selected_flag);
-              bool is_good=true;
-              if (current_node->GetName().find("std") != std::string::npos) {
-                  is_good=false;
-              }
-             if (selected_flag && is_good)
-              {
-                list_of_node_names.push_back(current_node->GetName());
-                mitk::ColorProperty *colorProperty;
-                colorProperty=dynamic_cast<mitk::ColorProperty*>(current_node->GetProperty("color"));
-                list_of_node_colors.push_back(colorProperty->GetColor());
-
-
-              }
-            }
-            if (!list_of_node_names.empty())
-            {
-
-              nuevarespuesta->SetIntProperty("medicas.gaming.NumberOfNodes",list_of_node_names.size());
-              for(std::vector<int>::size_type i = 0; i != list_of_node_names.size(); i++)
-              {
-                GetDataStorage()->GetNamedNode(list_of_node_names[i])->SetVisibility(false);
-                GetDataStorage()->GetNamedNode(list_of_node_names[i])->Modified();
-                string prop_name = "medicas.gaming.nodo" + std::to_string(i);
-                string prop_name_color_R = "medicas.gaming.color_nodo_R" + std::to_string(i);
-                string prop_name_color_G = "medicas.gaming.color_nodo_G" + std::to_string(i);
-                string prop_name_color_B = "medicas.gaming.color_nodo_B" + std::to_string(i);
-
-                float col[3];
-                col[0] = list_of_node_colors[i].GetRed();
-                col[1] =list_of_node_colors[i].GetGreen();
-                col[2] =list_of_node_colors[i].GetBlue();
-                nuevarespuesta->SetStringProperty(prop_name.c_str(),list_of_node_names[i].c_str());
-                nuevarespuesta->SetFloatProperty(prop_name_color_R.c_str(),col[0]);
-                nuevarespuesta->SetFloatProperty(prop_name_color_G.c_str(),col[1]);
-                nuevarespuesta->SetFloatProperty(prop_name_color_B.c_str(),col[2]);
-              }
-            }
-            else
-            {
-                nuevarespuesta->SetIntProperty("medicas.gaming.NumberOfNodes",0);
-            }
-
-            nuevarespuesta->SetIntProperty("medicas.gaming.view",m_Controls.cbVistasPreg->currentIndex());
-
-            return;
-        }
-    }
-    if (mode==2)
-    {
-        string extra="";
-        string name = "Respuesta" + std::to_string(N_items) +"-Opcion" + std::to_string(N_options[N_items-1]+1);
-        mitk::DataNode::Pointer nuevarespuesta = GetDataStorage()->GetNamedNode(name);
-        if(m_Controls.rbSI->isChecked())
-        {
-
-          m_flag_hay_correcta = true;
-          nuevarespuesta->SetBoolProperty("medicas.gaming.isCorrect",true);
-          extra = extra  +"CORRECTA";
-
-        }
-        else
-        {
-          nuevarespuesta->SetBoolProperty("medicas.gaming.isCorrect",false);
-        }
-        N_options[N_items-1]=N_options[N_items-1]+1;
-
-        if (N_options[N_items-1]==MAX_OPCS)
-        {
-          m_Controls.pbOtraOpcion->setEnabled(false);
-        }
-        mitk::RenderingManager::GetInstance()->RequestUpdateAll();
-        return;
-    }
-
-      //m_Controls.label_currentoptions->append(currentopts);
-
-
-
-
-}
 void Game_Estructuras::onAgregarOpcion()
 {
   //agregarOpcion(2);
-
-  simpleAgregarOpcion();
-
-  changeScreen(ESCRIBIR_OPC);
+  int status = simpleAgregarOpcion();
+  if (status==0)
+  {
+    changeScreen(ESCRIBIR_OPC);
+    return;
+  }
 }
 
 void Game_Estructuras::onConfirmarItem()

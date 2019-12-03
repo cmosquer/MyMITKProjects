@@ -102,7 +102,7 @@ private:
   void SetFocus() override;
   //void widgetToNodesView();
   //void widgetToItemsView();
-  void simpleAgregarOpcion();
+  int simpleAgregarOpcion();
   void agregarOpcion(int mode);
   void changeScreen(int);
   void prepararResumen();
