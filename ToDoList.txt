@@ -2,13 +2,13 @@ Desarrollo:
 -Funcionalidad boton Mostrar Item
 -Helper objects a los nodos pregunta
 -Agregar musica
-- que no te deje no elegir SI/NO de opcion correcta
-- que al eliminar la respuesta correcta te deje seleccionar otra
+
 -poner el msgbox de seleccion de correcta como funcion separada
 -que toggle de cbOpcion verifique si tiene nodos el item para enable/disable el boton Mostrar escenario virtual
+- que la explicacion de agregar opciones sea un message box y aparezca solo la primera vez
 
-Issues:
--despues de eliminar, el summary no updatea bien.
+Issue:
+- que al eliminar la respuesta correcta te deje seleccionar otra --> falla 
 
 
 Testing:

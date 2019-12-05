@@ -55,8 +55,9 @@ void GamePlay::playClicked(){
 GamePlay::GamePlay( QWidget * parent) : QDialog(parent)
 {
   setupUi(this);
+
   music = new QMediaPlayer();
-  const QUrl url = QUrl("file:///home/cineot/Documents/CANDE/work/huesitos/Plugins/my.awesomeproject.gameplugin/resources/gamemusic.mp3");
+  const QUrl url = QUrl("file://home/cande/work/MyMITKProjects/Plugins/my.awesomeproject.gameplugin/resources/gamemusic.mp3");
   music->setMedia(url);
   connect(music, &QMediaPlayer::mediaStatusChanged,
           this, [&](QMediaPlayer::MediaStatus status){
@@ -64,14 +65,14 @@ GamePlay::GamePlay( QWidget * parent) : QDialog(parent)
   });
   cout<<music->mediaStatus()<<endl;
   cout<<QMediaPlayer::MediaStatus::LoadedMedia<<endl;
-  /*
+    /*
   while(music->mediaStatus() != QMediaPlayer::MediaStatus::LoadedMedia)
   {
     cout<<"loaded: "<<music->mediaStatus()<<endl;
     cout<<"error: "<<music->error()<<endl;
     sleep(10);
   }
-  */
+    */
   connect(pbStart, SIGNAL (clicked()),this, SLOT(onStart()));
   pbItemEnd->hide();
   lblResultado->hide();
@@ -207,7 +208,8 @@ void GamePlay::SetItemWidgetInLayout(mitk::DataNode::Pointer itemNode, QLayout *
 
   if (n_nodes>0)
   {
-    mitk::StandaloneDataStorage::Pointer ds = mitk::StandaloneDataStorage::New();
+    cout<<"n nodes"<<n_nodes<<endl;
+      mitk::StandaloneDataStorage::Pointer ds = mitk::StandaloneDataStorage::New();
     int view;
     itemNode->GetIntProperty("medicas.gaming.view",view);
     QmitkRenderWindow *widget3D = new QmitkRenderWindow(this->parentWidget());
@@ -276,17 +278,17 @@ void GamePlay::SetItemWidgetInLayout(mitk::DataNode::Pointer itemNode, QLayout *
       mitkWidget1->GetRenderer()->GetVtkRenderer()->AddViewProp(m_RectangleRendering1);
       vtkRenderer *vtkrenderer;
 
-      if (vtkrenderer != nullptr)
-          vtkrenderer->ResetCamera();
+
       //mitk::BaseRenderer::GetInstance(mitkWidget1->GetVtkRenderWindow())->GetCameraController()->Fit();
       int w = vtkObject::GetGlobalWarningDisplay();
       vtkObject::GlobalWarningDisplayOff();
       vtkrenderer = mitk::BaseRenderer::GetInstance(mitkWidget1->GetVtkRenderWindow())->GetVtkRenderer();
 
-
+      if (vtkrenderer != nullptr)
+          vtkrenderer->ResetCamera();
 
       // Tell the renderwindow which (part of) the datastorage to render
-
+      cout<<"display interactor on"<<endl;
       mitk::DisplayInteractor::Pointer m_DisplayInteractor;
       m_DisplayInteractor = mitk::DisplayInteractor::New();
       m_DisplayInteractor->LoadStateMachine("DisplayInteraction.xml");
@@ -295,6 +297,8 @@ void GamePlay::SetItemWidgetInLayout(mitk::DataNode::Pointer itemNode, QLayout *
 
       //us::ModuleContext *context = us::GetModuleContext();
       //context->RegisterService<mitk::InteractionEventObserver>(m_DisplayInteractor.GetPointer());
+      cout<<"mapper id on"<<endl;
+
       mitkWidget1->GetRenderer()->SetMapperID(mitk::BaseRenderer::Standard2D);
       auto geo = ds->ComputeBoundingGeometry3D(ds->GetAll());
       mitk::RenderingManager::GetInstance()->InitializeViews(geo);
@@ -304,14 +308,7 @@ void GamePlay::SetItemWidgetInLayout(mitk::DataNode::Pointer itemNode, QLayout *
       layout->addWidget(mitkWidget1);
     }
   }
-/*  else
-  {
-    if(isquestion)
-    {
-      lbl->setGeometry(10,500,200,200);
-    }
-  }
- */
+
   if (!isquestion)
  {
       QPushButton *pb = new QPushButton;

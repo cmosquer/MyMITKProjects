@@ -599,9 +599,13 @@ void Game_Estructuras::deleteItem(int item)
 void Game_Estructuras::deleteOption(int pregunta, int item)
 {
     string name = "Respuesta" + std::to_string(pregunta+1) + "-Opcion"+ std::to_string(item+1);
+    bool is_correct;
 
     if(GetDataStorage()->GetNamedNode(name))
     {
+        GetDataStorage()->GetNamedNode(name)->GetBoolProperty("medicas.gaming.isCorrect",is_correct);
+
+
         GetDataStorage()->Remove(GetDataStorage()->GetNamedNode(name));
     }
     for (unsigned long j = item+1 ; j<N_options[pregunta]; j++)
@@ -616,10 +620,55 @@ void Game_Estructuras::deleteOption(int pregunta, int item)
 
         }
     }
+
+
     if (N_options[pregunta]!=0)
     {
       N_options[pregunta]--;
     }
+
+    if (is_correct)
+    {
+        QMessageBox msgBox;
+        std::string message = "Esta era la respuesta correcta así que deberá marcar otra";
+        msgBox.setText(message.c_str());
+        msgBox.setInformativeText("Seleccione la nueva respuesta correcta");
+        mitk::DataNode *nodoopcion;
+        std::string name;
+        std::string buttonName;
+        /*std::vector<QMessageBox::ButtonRole> roles;
+        roles[0] = QMessageBox::YesRole;
+        roles[1]= QMessageBox::NoRole;
+        roles[2] = QMessageBox::AcceptRole;
+        roles[3] = QMessageBox::RejectRole;
+        roles[4] = QMessageBox::ResetRole;*/
+        std::vector<QAbstractButton*> buttons;
+
+        for (unsigned long i =0;i<N_options[pregunta]; i++)
+        {
+          name = "Respuesta" + std::to_string(pregunta+1) +"-Opcion" + std::to_string(i+1);
+          nodoopcion = GetDataStorage()->GetNamedNode(name);
+          if(nodoopcion)
+          {
+            nodoopcion->GetStringProperty("medicas.gaming.text",buttonName);
+          }
+          QAbstractButton* button = msgBox.addButton(QString(buttonName.c_str()), QMessageBox::YesRole);
+          buttons.push_back(button);
+        }
+
+        //msgBox.setStandardButtons(QMessageBox::Cancel|QMessageBox::Yes);
+        msgBox.exec();
+        QAbstractButton* selectedbutton = msgBox.clickedButton();
+        cout<<buttons[0]<<endl;
+        cout<<selectedbutton<<endl;
+        ptrdiff_t index = buttons.at(0)-selectedbutton;
+        std::string correctName = "Respuesta" + std::to_string(pregunta+1) +"-Opcion" + std::to_string(index+1);
+        nodoopcion = GetDataStorage()->GetNamedNode(correctName);
+        cout<<correctName<<endl;
+        nodoopcion->SetBoolProperty("medicas.gaming.isCorrect",true);
+        m_flag_hay_correcta = true;
+    }
+
 
 }
 
