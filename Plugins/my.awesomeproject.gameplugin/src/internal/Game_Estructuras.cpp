@@ -194,38 +194,7 @@ void Game_Estructuras::changeScreen(int scr)
     m_Controls.labelItems->setVisible(false);
     m_Controls.labelResumen->setVisible(false);
   }
-  if(scr==INICIO_RESPUESTA)
-  {
-    std::string tit = "Respuesta "+ std::to_string(N_items);
-    m_Controls.labelTitulo->setText(tit.c_str());
 
-    m_Controls.pbCrear->setVisible(false);
-    m_Controls.pbCargarJuego->setVisible(false);
-    m_Controls.pbAtras->setVisible(true);
-    m_Controls.pbAtras->setText("Atrás");
-    m_Controls.pbConfirmar->setText("Crear primera opción de respuesta");
-    m_Controls.pbConfirmar->setVisible(true);
-    m_Controls.pbOtraOpcion->setVisible(false);
-    m_Controls.pbEliminar->setVisible(false);
-    m_Controls.pbMostrar->setVisible(false);
-
-    m_Controls.labelScore->setVisible(false);
-    m_Controls.indicacion->setVisible(true);
-    m_Controls.indicacion->setText("A continuación, vamos a crear una por una las opciones \nmultiple-choice para esta pregunta.");
-    m_Controls.lePreg->setVisible(false);
-    m_Controls.leScore->setVisible(false);
-    m_Controls.aclaracion->setText("                ");
-
-    m_Controls.cbOpcion->setVisible(false);
-    m_Controls.cbItem->setVisible(false);
-    m_Controls.textResumen->setVisible(false);
-    m_Controls.cbGenerico->setVisible(false);
-    m_Controls.cbEscenario->setVisible(false);
-    m_Controls.cbVistasPreg->setVisible(false);
-    m_Controls.labelItems->setVisible(false);
-    m_Controls.labelResumen->setVisible(false);
-
-  }
   if(scr==ESCRIBIR_OPC)
   {
     m_Controls.cbGenerico->setChecked(false);
@@ -339,7 +308,7 @@ void Game_Estructuras::CreateQtPartControl(QWidget* parent)
 
   nodesView = new QLineEdit;
   itemsView = new QHBoxLayout;
-
+  first_question = true;
 }
 void Game_Estructuras::onGenerico()
 {
@@ -458,19 +427,21 @@ void Game_Estructuras::onConfirmar()
 
   if (current_screen==ESCRIBIR_PREG) //Pantalla de nueva pregunta
   {
+    if (first_question)
+    {
+        first_question = false;
+        QMessageBox::warning(NULL, "Multiple choice", "A continuación, vamos a crear una por una las opciones multiple-choice para esta pregunta.\n\n "
+                                                      "Podrá armar un escenario virtual para cada opción. \n\nEn cada opción debe indicar si es respuesta correcta. Solo puede haber una respuesta correcta.");
 
+
+    }
     int state = onSimpleConfirmarPreg();
     if (state==0)
-        changeScreen(INICIO_RESPUESTA);
+        changeScreen(ESCRIBIR_OPC);
 
     return;
   }
-  if(current_screen==INICIO_RESPUESTA) //Pantalla de nueva opción
-  {
 
-    changeScreen(ESCRIBIR_OPC);
-    return;
-  }
   if(current_screen==ESCRIBIR_OPC) //Pantalla de nueva opción
   {
     int status = simpleAgregarOpcion();
@@ -512,13 +483,7 @@ void Game_Estructuras::onAtras()
       return;
     }
   }
-  if(current_screen==INICIO_RESPUESTA)
-  {
-    changeScreen(ESCRIBIR_PREG);
-    m_Controls.pbConfirmar->setEnabled(true);
 
-    return;
-  }
   if(current_screen==ESCRIBIR_OPC)
   {
     onCancelarItem();

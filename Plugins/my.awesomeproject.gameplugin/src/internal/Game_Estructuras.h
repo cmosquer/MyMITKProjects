@@ -129,6 +129,7 @@ private:
   //vector <mitk::DataNode::Pointer> m_currentAnswer;
   bool m_flag_hay_correcta;
   bool m_standard_options_flag;
+  bool first_question;
   int current_screen;
   std::vector <std::string> items_summaries;
   std::vector <std::string> standard_options_names;
